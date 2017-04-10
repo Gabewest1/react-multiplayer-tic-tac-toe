@@ -5,8 +5,11 @@ const path = require("path");
 const app = express();
 
 app.use(express.static("app"));;
-app.use("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname,"..", "app", "index.html"));
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname,"..", "app", "home.html"));
+})
+app.get("/ticTacToe", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "app", "ticTacToe.html"))
 })
 
 const server= app.listen(8000, () => console.log("running on port 8000"));
@@ -25,5 +28,5 @@ io.on("connection", (socket) => {
     socket.on("move", (data) => io.emit("move", data))
 
     socket.on("reset", () =>io.emit("reset"))
-
 })
+io.on("")
