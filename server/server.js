@@ -29,4 +29,14 @@ io.on("connection", (socket) => {
 
     socket.on("reset", () =>io.emit("reset"))
 })
-io.on("")
+
+io.sockets.on("connection", function (socket) {
+    socket.on("echo", function (msg, callback) {
+        callback = callback || function () {};
+ 
+        socket.emit("echo", msg);
+ 
+        callback(null, "Done.");
+    });
+});
+module.exports.server = server;

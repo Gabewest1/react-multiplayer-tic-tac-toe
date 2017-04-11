@@ -4,14 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha tests/rockPaperScissors.test.js",
     "start": "nodemon server/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^3.5.0",
     "express": "^4.15.2",
+    "mocha": "^3.2.0",
     "socket.io": "^1.7.3"
   }
 }
