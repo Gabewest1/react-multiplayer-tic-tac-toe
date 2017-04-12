@@ -1,7 +1,9 @@
 const express = require("express");
 const socket = require("socket.io");
 const path = require("path");
+const GameManager = require("./GameManager");
 const determineWinner = require("./rockPaperScissors");
+
 const app = express();
 
 app.use(express.static("app"));;
@@ -21,6 +23,13 @@ let teams = ["X", "O"];
 const io = socket(server);
 io.on("connection", (socket) => {
     io.emit("reset");
+    
+    socket.on("playOnline", () => {
+        GameManager.addPlayer(socket);
+    })
+    socket.on("foundPlayer", () => {
+        
+    })
 
     console.log(`${socket.id} connected to the game`);
 
@@ -41,16 +50,6 @@ io.on("connection", (socket) => {
         socket.emit("echo", msg);
         callback(null, "Done.");
     });
-
-    socket.on("RPC winner", (winner) => {
-        if(winner === "p1") {
-
-        } else if(winner === "p2") {
-
-        } else if(winner === "draw") {
-
-        }
-    })
 
     socket.on("RPC move", (choice) => {
         let winner = determineWinner(choice[0], choice[1])
