@@ -1,6 +1,3 @@
-const io = require("socket.io");
-const socket = io();
-
 function determineWinner(p1, p2) {
     let winner;
     switch(p1) {
@@ -36,7 +33,6 @@ function determineWinner(p1, p2) {
         break;
     }
     
-    socket.emit("RPC winner", winner);
     return winner;
 }
 module.exports = determineWinner;

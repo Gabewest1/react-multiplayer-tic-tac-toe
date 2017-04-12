@@ -1,8 +1,11 @@
 body {
+    background: url("/assets/images/chalkboard--large.jpg") center;
+    background-size: cover;
     display: flex;
     flex-direction: column; 
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 .row {
     display: flex;
@@ -22,6 +25,9 @@ body {
 }
 
 @media (max-width: 480px) {
+    body {
+        /*background: url("/assets/images/chalkboard--small.jpg");*/
+    }
     .tile {
         width: 75px;
         height: 75px;
