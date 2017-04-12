@@ -1,7 +1,8 @@
-// console.log("home page making an ajax request");
-// let ticTacToePage = $.ajax("/ticTacToe").then(response => {
-//     console.log(response);
-//     // let html = html.match(/<head>.*<\/body>/)[0];
-//     // console.log(html);
-//     $("body").html(response);
-// })
+$(document).ready(() => {
+    $("#playOnline").click(playOnlineHandler);
+})
+
+function playOnlineHandler(e) {
+    console.log("play online clicked!");
+    $.ajax("/loading.html").then(response => $(document.body).html(response));
+}

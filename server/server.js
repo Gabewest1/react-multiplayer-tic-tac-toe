@@ -11,6 +11,9 @@ app.get("/", (req, res) => {
 app.get("/ticTacToe", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "app", "ticTacToe.html"))
 })
+app.get("/loading", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "..", "app", "loading.html"));
+})
 
 const server= app.listen(8000, () => console.log("running on port 8000"));
 
@@ -20,6 +23,7 @@ io.on("connection", (socket) => {
     io.emit("reset");
 
     console.log(`${socket.id} connected to the game`);
+
     socket.emit("chooseTeam", teams, (team) => {
         console.log(`player choose to be: ${team}`);
         let index = teams.indexOf(team);
