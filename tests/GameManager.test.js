@@ -1,4 +1,3 @@
-const GameManager = require("../server/GameManager")
 const chai = require("chai")
 const expect = chai.expect
 const should = chai.should()
@@ -8,8 +7,11 @@ const colors = require("colors")
 describe("GameManager", () => {
     let client
     let server
+    let serverSocket
     beforeEach((done) => {
         server = require("../server/server.js").server
+        serverSocket = require("../server/server.js").socket
+        const GameManager = require("../server/GameManager")(serverSocket)
 
         client = io("http://localhost:8000")
         done()
