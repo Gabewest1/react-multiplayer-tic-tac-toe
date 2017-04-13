@@ -14,18 +14,19 @@ app.get("/ticTacToe", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "app", "ticTacToe.html"))
 })
 app.get("/loading", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "..", "app", "loading.html"));
+    res.sendFile(path.resolve(__dirname, "..", "app", "loading.html"))
 })
 
-const server= app.listen(8000, () => console.log("running on port 8000"));
+const server= app.listen(8000, () => console.log("running on port 8000"))
 
-let teams = ["X", "O"];
-const io = socket(server);
+let teams = ["X", "O"]
+const io = socket(server)
 io.on("connection", (socket) => {
-    io.emit("reset");
+    io.emit("reset")
     
     socket.on("playOnline", () => {
-        GameManager.addPlayer(socket);
+        GameManager.addPlayer(socket)
+        GameManager.showGames()
     })
     socket.on("foundPlayer", () => {
         
@@ -35,7 +36,7 @@ io.on("connection", (socket) => {
 
     socket.emit("chooseTeam", teams, (team) => {
         console.log(`player choose to be: ${team}`);
-        let index = teams.indexOf(team);
+        let removalIndex = teams.removalIndexOf(team);
         teams.splice(index, 1);
         console.log(teams);
     });
@@ -59,3 +60,4 @@ io.on("connection", (socket) => {
 })
 
 module.exports.server = server;
+module.exports.socket = io;

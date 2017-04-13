@@ -51,7 +51,7 @@ describe("echo", () => {
         client.on("connect", () => {
             client.on("RPC winner", (winner) => {
                 winner.should.equal("p1");
-                console.log(colors.rainbow(`winner is: ${winner}`));
+                
                 client.disconnect();
                 done();
             })

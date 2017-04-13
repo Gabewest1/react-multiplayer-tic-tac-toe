@@ -1,7 +1,7 @@
 <style>
     .loading {
         color: white;
-        font-size: 36px;
+        font-size: 48px;
     }
     .loading span {
         animation-name: loading;
@@ -27,10 +27,15 @@
     let animationDelay = animationDuration/loadingText.length;
     let delayCounter = 0;
 
-    loadingText = loadingText.map(letter => {
-        return $("<span>").text(letter)
-                          .css("animation-duration", `${animationDuration}ms`)
-                          .css("animation-delay", `${animationDelay*delayCounter++}ms`)
+    loadingText = loadingText.map(letter => { 
+        if(letter !== ".") 
+            return letter
+
+        let $animatedSpan = $("<span>")
+        $animatedSpan.text(letter)
+        $animatedSpan.css("animation-duration", `${animationDuration}ms`)
+        $animatedSpan.css("animation-delay", `${animationDelay*delayCounter++}ms`)
+        return $animatedSpan
     });
 
     $(".loading").html(loadingText);
