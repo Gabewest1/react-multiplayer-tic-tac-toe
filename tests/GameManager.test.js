@@ -24,7 +24,7 @@ describe("GameManager", () => {
     // })
     it("should add a player to a game room", (done) => {
         let playerWasAdded = false;
-        
+
         client.on("connect", () => {
             client.on("player joined", (data) => {
                 playerWasAdded = true;
@@ -41,7 +41,7 @@ describe("GameManager", () => {
     })
     it("should add a spectator to a game room", (done) => {
         let spectatorWasAdded = false;
-        
+
         client.on("connect", () => {
             client.on("spectator joined", (data) => {
                 spectatorWasAdded = true;
@@ -56,4 +56,37 @@ describe("GameManager", () => {
             }, 1000)
         })
     })
+    it("should have 2 game rooms setup after adding 3 players", (done) => {
+        let client2 = io("https://localhost:8000")
+        let client3 = io("https://localhost:8000")
+
+        GameManager.addPlayer(client)
+        GameManager.addPlayer(client2)
+        GameManager.addPlayer(client3)
+
+        GameManager.gameRooms.length.should.equal(2)
+
+        client.disconnect()
+        client2.disconnect()
+        client3.disconnect()
+        done()
+    })
+    it("should have 2 game rooms setup after adding 4 players", (done) => {
+        let client2 = io("https://localhost:8000")
+        let client3 = io("https://localhost:8000")
+        let client4 = io("https://localhost:8000")
+
+        GameManager.addPlayer(client)
+        GameManager.addPlayer(client2)
+        GameManager.addPlayer(client3)
+        GameManager.addPlayer(client4)
+
+        GameManager.gameRooms.length.should.equal(2)
+
+        client.disconnect()
+        client2.disconnect()
+        client3.disconnect()
+        client4.disconnect()
+        done()
+    }) 
 })

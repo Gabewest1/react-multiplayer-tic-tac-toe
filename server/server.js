@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
         
     })
 
-    console.log(`${socket.id} connected to the game`);
+    // console.log(`${socket.id} connected to the game`);
 
     socket.emit("chooseTeam", teams, (team) => {
         console.log(`player choose to be: ${team}`);
