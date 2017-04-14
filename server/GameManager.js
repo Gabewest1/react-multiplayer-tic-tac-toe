@@ -3,7 +3,6 @@ class GameManager {
         this.gameRooms = [];
         this.gameRoomCounter = 0;
         this.socket = serverSocket;
-        this.test;
     }
 
     showGames() {
@@ -23,16 +22,19 @@ class GameManager {
     addPlayer(player) {
         let openGame = this.getOpenGame()
         openGame.players.push(player)
-        console.log("player added!!!")
-        this.test = player;
-        player.emit("player joined", {msg: "Hello world"})
-        // this.messageGameRoom(openGame.id, "player joined", {msg: "Hello World"})
+        this.messageGameRoom(openGame.id, "player joined")
+    }
+
+    addSpectator(spectator) {
+        let openGame = this.getOpenGame()
+        openGame.spectators.push(spectator)
+        this.messageGameRoom(openGame.id, "spectator joined")
     }
 
     messageGameRoom(gameRoomId, eventName, data) {
-        let gameRoom = this.gameRooms.filter(room => room.id === gameRoomId)
-        gameRoom.players.forEach(player => player.emit(eventName, data))
-        gameRoom.spectators.forEach(player => player.emit(eventName, data))
+        let gameRoom = this.gameRooms.filter(room => room.id === gameRoomId)[0]
+        gameRoom.players.forEach(player => this.socket.to(player.id).emit(eventName, data))
+        gameRoom.spectators.forEach(player => this.socket.to(player.id).emit(eventName, data))
     }
 
     getOpenGame() {
