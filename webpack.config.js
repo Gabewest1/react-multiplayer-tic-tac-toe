@@ -2,10 +2,11 @@ const path = require("path")
 const webpack = require("webpack")
 
 module.exports = {
-    entry: "/app.js",
+    entry: "./app/app.js",
     output: {
         filename: "bundle.js",
-        path: "/"
+        path: path.resolve(__dirname, "app"),
+        publicPath: "/"
     },
     module: {
         rules: [
