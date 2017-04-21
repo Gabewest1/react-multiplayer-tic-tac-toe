@@ -1,7 +1,6 @@
 import React from "react"
-import { Route } from "react-router-dom"
 
-import Wrapper from "./wrapper"
+import Wrapper from "./Wrapper"
 import Button from "./Button"
 
 export default class HomePage extends React.Component {
