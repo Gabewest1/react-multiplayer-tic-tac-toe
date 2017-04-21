@@ -2,11 +2,14 @@ const path = require("path")
 const webpack = require("webpack")
 
 module.exports = {
+    devtool: "source-map",
     entry: "./app/app.js",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "app"),
-        publicPath: "/"
+        publicPath: "/",
+        sourceMapFilename: "./bundle.js.map",
+        devtoolLineToLine: true
     },
     module: {
         rules: [
@@ -14,7 +17,7 @@ module.exports = {
                 test: /\.jsx?/,
                 loader: "babel-loader",
                 options: {
-                    presets: ["react", "es2015"]
+                    presets: ["react", "es2015", "stage-0"]
                 }
             },
             {
