@@ -5,3 +5,5 @@ let Wrapper = styled.div`
     justify-content: center;
     align-items: center;
 `
+
+export default Wrapper

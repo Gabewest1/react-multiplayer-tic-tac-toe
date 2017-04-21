@@ -6,8 +6,8 @@ export default class MatchMakingPage extends React.Component {
     //animates the searching for opponent text
     //
     //if we found an opponent then display text alerting player so
-    return() {
-        render (
+    render() {
+        return (
             <Wrapper>
                 {}
             </Wrapper>
