@@ -20,6 +20,24 @@ module.exports = {
             {
                 test: /\.css/,
                 loader: "style-loader!css-loader"
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+                    {
+                        loader: "image-webpack-loader",
+                        query: {
+                            bypassOnDebug: true,
+                            gifsicle: {
+                                interlaced: true
+                            },
+                            optipng: {
+                                optimizationLevel: 7
+                            }
+                        }
+                    }
+                ]
             }
         ]
     },
