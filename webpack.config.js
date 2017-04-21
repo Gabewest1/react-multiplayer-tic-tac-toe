@@ -8,7 +8,7 @@ module.exports = {
         filename: "bundle.js",
         path: path.resolve(__dirname, "app"),
         publicPath: "/",
-        sourceMapFilename: "./bundle.js.map",
+        sourceMapFilename: "bundle.js.map",
         devtoolLineToLine: true
     },
     module: {
@@ -54,4 +54,5 @@ module.exports = {
             path.resolve(__dirname, "app")
         ]
     },
+    watch: true
 }
