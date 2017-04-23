@@ -1,15 +1,30 @@
+import React from "react"
 import styled from "styled-components"
+import Tile from "./Tile"
 
-let Tile = styled.div`
-    background-color: ${(props) => props.X ? "red" : props.O ? "blue" : ""};
-    display: inline-block;
-    width: 150px;
-    height: 150px;
+export default class TicTacToeTile extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            isSet: false,
+            X: false,
+            O: false
+        }
 
-    @media (max-width: 600px) {
-        width: 100px;
-        height: 100px;
     }
-`
-
-export default Tile
+    handleClick(e) {
+        console.log(`${e.target.getAttribute("data-tile")} said that tickled c:`)
+        console.log(typeof e.target.getAttribute("data-tile"))
+        this.setState({X: true})
+    }
+    render() {
+        return (
+            <Tile 
+                X={this.state.X}
+                O={this.state.O}
+                data-tile={this.props["data-tile"]} 
+                onClick={this.handleClick.bind(this)}
+            />
+        )
+    }
+}
