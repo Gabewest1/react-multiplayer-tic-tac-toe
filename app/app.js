@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { composeWithDevTools } from "redux-devtools-extension"
 
 import reducers from './reducers'
 

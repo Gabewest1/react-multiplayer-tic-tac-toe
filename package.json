@@ -29,6 +29,7 @@
     "react-router-dom": "^4.0.0",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.0",
     "semantic-ui-icon": "^2.2.10",
     "socket.io": "^1.7.3",
     "style-loader": "^0.16.1",
