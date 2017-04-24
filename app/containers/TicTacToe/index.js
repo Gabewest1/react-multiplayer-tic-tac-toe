@@ -14,22 +14,28 @@ class TicTacToe extends React.Component {
         console.log(this.props)
     }
     handleClick(e) {
+        let props = this.props
         let tile = e.target.getAttribute("data-tile")
-        this.props.setTile(tile, "player1")
+        // props.setTile(tile, props.team)
+        props.setTile(tile, "x")
     }
 
     createTiles() {
-        let tiles = []
-        for(var i=0; i<9; i+=3) {
-            tiles.push((
+        let counter = 0
+        let rows = this.props.board.map((row, i) => {
+            return (
                 <Row key={i}>
-                    <Tile onClick={(e) => this.handleClick(e)} data-tile={i} key={i} />
-                    <Tile onClick={(e) => this.handleClick(e)} data-tile={i+1} key={i+1} />
-                    <Tile onClick={(e) => this.handleClick(e)} data-tile={i+2} key={i+2} />
+                    {this.props.board[i].map(tile => {
+                        return (
+                            <Tile onClick={(e) => this.handleClick(e)} data-tile={counter} key={counter++} />
+                        )
+                     })
+                    }
                 </Row>
-            ))
-        }
-        return tiles
+            )
+        })
+
+        return rows
     }
 
     render() {

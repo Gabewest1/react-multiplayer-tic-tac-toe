@@ -21,7 +21,7 @@ export default function ticTacToeReducer(state = initialState, action) {
 function createBoard() {
     let board = []
     for(var i=0; i<3; i++) {
-        board.push([])
+        board.push([undefined, undefined, undefined])
     }
     return board
 }
