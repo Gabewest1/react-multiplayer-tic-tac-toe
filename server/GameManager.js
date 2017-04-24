@@ -1,4 +1,4 @@
-const determineWinner = require("./rockPaperScissors")
+const determineWinner = require("./rockPaperScissorsWinner")
 
 class GameManager {
     constructor(serverSocket) {
