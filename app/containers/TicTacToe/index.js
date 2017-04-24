@@ -10,9 +10,11 @@ import Row from "./Row"
 import { setTile } from "./actions"
 
 class TicTacToe extends React.Component {
+    componentWillMount() {
+        console.log(this.props)
+    }
     handleClick(e) {
         let tile = e.target.getAttribute("data-tile")
-        console.log(tile)
         this.props.setTile(tile, "player1")
     }
 
@@ -43,7 +45,7 @@ class TicTacToe extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        ticTacToe: state.TicTacToe
+        ...state.TicTacToe
     }
 }
 function mapDispatchToProps(dispatch) {

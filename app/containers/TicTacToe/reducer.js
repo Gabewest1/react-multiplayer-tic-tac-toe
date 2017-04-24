@@ -10,7 +10,6 @@ let initialState = {
 }
 
 export default function ticTacToeReducer(state = initialState, action) {
-    console.log("ticTacToe reducer entered", action.type)
     switch(action.type) {
         case SET_TILE: 
             return {...state, board: action.payload}
