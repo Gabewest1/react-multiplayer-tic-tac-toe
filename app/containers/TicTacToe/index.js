@@ -4,31 +4,32 @@ import Tile from "components/TicTacToeTile"
 import Wrapper from "./Wrapper"
 import Row from "./Row"
 
+import { setTile } from "./actions"
+
 export default class TicTacToe extends React.Component {
     handleClick(e) {
-        console.log(`${e.target.getAttribute("data-tile")} said that tickled c:`)
-        console.log(typeof e.target.getAttribute("data-tile"))
+        console.log(e.target.getAttribute("data-tile"))
+    }
+
+    createTiles() {
+        let tiles = []
+        for(var i=0; i<9; i+=3) {
+            tiles.push((
+                <Row key={i}>
+                    <Tile onClick={this.handleClick} data-tile={i} key={i} />
+                    <Tile onClick={this.handleClick} data-tile={i+1} key={i+1} />
+                    <Tile onClick={this.handleClick} data-tile={i+2} key={i+2} />
+                </Row>
+            ))
+        }
+        return tiles
     }
 
     render() {
         return (
             <Wrapper>
                 <TicTacToeBoard>
-                    <Row>
-                        <Tile onClick={this.handleClick} data-tile="0" />
-                        <Tile onClick={this.handleClick} data-tile="1" />
-                        <Tile onClick={this.handleClick} data-tile="2" />
-                    </Row>
-                    <Row>
-                        <Tile onClick={this.handleClick} data-tile="3" />
-                        <Tile onClick={this.handleClick} data-tile="4" />
-                        <Tile onClick={this.handleClick} data-tile="5" />
-                    </Row>
-                    <Row>
-                        <Tile onClick={this.handleClick} data-tile="6" />
-                        <Tile onClick={this.handleClick} data-tile="7" />
-                        <Tile onClick={this.handleClick} data-tile="8" />
-                    </Row>
+                    {this.createTiles()}
                 </TicTacToeBoard>
             </Wrapper>
         )

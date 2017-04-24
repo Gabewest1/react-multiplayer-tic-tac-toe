@@ -1,8 +1,12 @@
 import {
     SET_TILE
 } from "./constants"
+
 let initialState = {
-    board: createBoard()
+    board: createBoard(),
+    player1: undefined,
+    player2: undefined,
+    spectators: []
 }
 
 export default function ticTacToeReducer(state = initialState, action) {
