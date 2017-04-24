@@ -30,4 +30,12 @@ io.on("connection", (socket) => {
     socket.on("reset", () => {
         io.emit("reset")
     })
+
+    socket.on("action", (action) => {
+        console.log("Got my test to work!")
+        switch(action.type) {
+            case "SET_PLAYER":
+                socket.emit("action", {type: "SET_PLAYER", player: socket})
+        }
+    })
 })
