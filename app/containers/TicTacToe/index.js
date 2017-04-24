@@ -16,6 +16,7 @@ class TicTacToe extends React.Component {
     handleClick(e) {
         let props = this.props
         let tile = e.target.getAttribute("data-tile")
+        console.log(tile)
         // props.setTile(tile, props.team)
         props.setTile(tile, "x")
     }
@@ -25,9 +26,12 @@ class TicTacToe extends React.Component {
         let rows = this.props.board.map((row, i) => {
             return (
                 <Row key={i}>
-                    {this.props.board[i].map(tile => {
+                    {row.map(tile => {
                         return (
-                            <Tile onClick={(e) => this.handleClick(e)} data-tile={counter} key={counter++} />
+                            <Tile onClick={(e) => this.handleClick(e)}
+                                  team={tile}
+                                  data-tile={counter}
+                                  key={counter++} />
                         )
                      })
                     }
