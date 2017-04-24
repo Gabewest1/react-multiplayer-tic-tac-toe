@@ -17,13 +17,12 @@ class TicTacToe extends React.Component {
         let props = this.props
         let tile = e.target.getAttribute("data-tile")
         console.log(tile)
-        // props.setTile(tile, props.team)
         props.setTile(tile, "x")
     }
 
     createTiles() {
         let counter = 0
-        let rows = this.props.board.map((row, i) => {
+        return this.props.board.map((row, i) => {
             return (
                 <Row key={i}>
                     {row.map(tile => {
@@ -38,8 +37,6 @@ class TicTacToe extends React.Component {
                 </Row>
             )
         })
-
-        return rows
     }
 
     render() {
