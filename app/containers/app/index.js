@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 
 import HomePage from "containers/HomePage"
 import TicTacToe from "containers/TicTacToe"
+import RockPaperScissors from "containers/RockPaperScissors"
 
 import Wrapper from "./Wrapper"
 import chalkboard from "./chalkboard.jpg"
@@ -13,6 +14,7 @@ export default class App extends React.Component {
             <Wrapper bg={chalkboard}>
                 <Route exact path="/" component={HomePage} />
                 <Route path="/ticTacToe" component={TicTacToe} />
+                <Route path="/rockPaperScissors" component={RockPaperScissors} />
             </Wrapper>
         )
     }
