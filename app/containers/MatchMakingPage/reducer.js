@@ -11,7 +11,7 @@ let initialState = {
 export default function matchMakingReducer(state = initialState, action) {
     switch(action.state) {
         case FOUND_OPPONENT:
-            return {...state, foundOpponent: true}
+            return {...state, foundOpponent: action.payload}
         case ERROR:
             return {...state, error: true}
         default:
