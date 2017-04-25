@@ -1,16 +1,40 @@
 import React from "react"
-import Wrapper from "./Wrapper"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 
-export default class MatchMakingPage extends React.Component {
-    //if the state is searching is for match, call function that 
-    //animates the searching for opponent text
-    //
-    //if we found an opponent then display text alerting player so
+import Wrapper from "./Wrapper"
+import AnimatedSearchText from "components/MatchmakingSearchText"
+
+class MatchMakingPage extends React.Component {
+    searchingForOpponent() {
+        return (
+            <AnimatedSearchText>Searching for opponent...</AnimatedSearchText>
+        )
+    }
+    foundOpponent() {
+        return (
+            <div>Found Opponent!</div>
+        )
+    }
     render() {
         return (
             <Wrapper>
-                {}
+                {this.props.foundOpponent ? this.foundOpponent() : this.searchingForOpponent()}
             </Wrapper>
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        ...state.matchMaking
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({
+        
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MatchMakingPage)
