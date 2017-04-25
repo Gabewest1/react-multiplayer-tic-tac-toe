@@ -7,6 +7,12 @@ import AnimatedSearchText from "components/MatchmakingSearchText"
 import * as actions from "./actions"
 
 class MatchMakingPage extends React.Component {
+    handleOppenentJoined() {
+        this.props.opponentJoined()
+    }
+    handleOpponentLeft() {
+        this.props.opponentLeft()
+    }
     renderSearchingForOpponent() {
         return (
             <AnimatedSearchText>Searching for opponent...</AnimatedSearchText>
