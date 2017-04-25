@@ -5,3 +5,10 @@ export function setPlayer(player, team) {
         team
     }
 }
+
+export function test(msg) {
+    return {
+        type: "test",
+        msg
+    }
+}

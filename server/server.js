@@ -34,8 +34,8 @@ io.on("connection", (socket) => {
     socket.on("action", (action) => {
         console.log("Got my test to work!")
         switch(action.type) {
-            case "SET_PLAYER":
-                socket.emit("action", {type: "SET_PLAYER", player: socket})
+            case "test":
+                socket.emit("action", {type: "SET_PLAYER", player: "player1", team: "x"})
         }
     })
 })

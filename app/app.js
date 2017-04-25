@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 
+import socket from "./socket"
 import createSocketIoMiddleware from "redux-socket.io"
-import io from "socket.io-client"
-let socket = io("http://localhost:8000")
 let socketIoMiddleware = createSocketIoMiddleware(socket, "server/")
 
 import createHistory from 'history/createBrowserHistory'
