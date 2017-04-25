@@ -8,7 +8,7 @@ export function setPlayer(player, team) {
 
 export function test(msg) {
     return {
-        type: "test",
+        type: "server/test",
         msg
     }
 }

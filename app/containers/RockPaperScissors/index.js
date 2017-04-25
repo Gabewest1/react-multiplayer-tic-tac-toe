@@ -4,12 +4,11 @@ import { connect } from "react-redux"
 import socket from "socket"
 
 import Wrapper from "./Wrapper"
-import { setPlayer, test } from "./actions"
+import * as actions from "./actions"
 
 class RockPaperScissors extends React.Component {
     handleClick(e) {
         let choice = e.target.textContent
-        socket.emit()
         // this.props.setPlayer("player1", "x")
         // this.props.setPlayer("player2", "o")
         console.log(this.props)
@@ -33,8 +32,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({
-        setPlayer,
-        test
+        ...actions
     }, dispatch)
 }
 

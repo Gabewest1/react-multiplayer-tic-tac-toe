@@ -4,22 +4,24 @@ import { bindActionCreators } from "redux"
 
 import Wrapper from "./Wrapper"
 import AnimatedSearchText from "components/MatchmakingSearchText"
+import * as actions from "./actions"
 
 class MatchMakingPage extends React.Component {
-    searchingForOpponent() {
+    renderSearchingForOpponent() {
         return (
             <AnimatedSearchText>Searching for opponent...</AnimatedSearchText>
         )
     }
-    foundOpponent() {
+    renderFoundOpponent() {
         return (
             <div>Found Opponent!</div>
         )
     }
     render() {
+        console.log(this.props)
         return (
             <Wrapper>
-                {this.props.foundOpponent ? this.foundOpponent() : this.searchingForOpponent()}
+                {this.props.foundOpponent ? this.renderFoundOpponent() : this.renderSearchingForOpponent()}
             </Wrapper>
         )
     }
@@ -32,9 +34,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        
-    }, dispatch)
+    return bindActionCreators(actions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchMakingPage)
