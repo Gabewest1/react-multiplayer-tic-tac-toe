@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Chalk";
+    src: url("/assets/fonts/SqueakyChalkSound.ttf") format("truetype")
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
