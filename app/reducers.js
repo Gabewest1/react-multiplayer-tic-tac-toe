@@ -1,9 +1,11 @@
 import homePage from "containers/HomePage/reducer"
 import matchMaking from "containers/MatchMakingPage/reducer"
 import ticTacToe from "containers/TicTacToe/reducer"
+import rockPaperScissors from "containers/RockPaperScissors/reducer"
 
 export default {
     homePage,
     matchMaking,
-    ticTacToe
+    ticTacToe,
+    rockPaperScissors
 }
