@@ -6,9 +6,15 @@ export function setPlayer(player, team) {
     }
 }
 
-export function test(msg) {
+export function rockPaperScissors(choice) {
     return {
-        type: "server/test",
-        msg
+        type: "server/ROCK_PAPER_SCISSORS_MOVE",
+        payload: choice
+    }
+}
+
+export function resetRockPaperScissors() {
+    return {
+        type: "ROCK_PAPER_SCISSORS_RESET"
     }
 }
