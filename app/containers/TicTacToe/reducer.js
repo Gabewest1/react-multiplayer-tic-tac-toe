@@ -6,6 +6,7 @@ let initialState = {
     board: createBoard(),
     player1: undefined,
     player2: undefined,
+    team: undefined,
     currentPlayersTurn: undefined,
     gameOver: false,
     winner: false,
@@ -13,7 +14,6 @@ let initialState = {
 }
 
 export default function ticTacToeReducer(state = initialState, action) {
-    console.log(action.type, action.player, action.team)
     switch(action.type) {
         case SET_TILE: 
             return {...state, board: setTile(state.board, action.tile, action.team)}

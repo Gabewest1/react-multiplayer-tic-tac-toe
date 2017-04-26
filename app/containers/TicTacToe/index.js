@@ -14,10 +14,10 @@ class TicTacToe extends React.Component {
         console.log(this.props)
     }
     handleClick(e) {
-        let props = this.props
+        let { team } = this.props
         let tile = e.target.getAttribute("data-tile")
         console.log(tile)
-        props.setTile(tile, "x")
+        props.setTile(tile, team)
     }
 
     createTiles() {
@@ -52,7 +52,7 @@ class TicTacToe extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.TicTacToe
+        ...state.ticTacToe
     }
 }
 function mapDispatchToProps(dispatch) {
