@@ -1,4 +1,5 @@
 const determineWinner = require("./rockPaperScissorsWinner")
+const colors = require("colors")
 
 class GameRoomManager {
     constructor(serverSocket) {
@@ -58,22 +59,30 @@ class GameRoomManager {
 
         return this.createGameRoom()
     }
-    rockPaperScissors(choice, player) {
+    rockPaperScissors(player, choice) {
         let playersGameRoom = this.findPlayersGameRoom(player)
         console.log(`found players game room: ${playersGameRoom}`)
         playersGameRoom.rockPaperScissors.push({socket: player, choice})
         
         if(playersGameRoom.rockPaperScissors.length === 2) {
             console.log("dispatching a winner")
-            this.dispatchRockPaperScissorsWinner(playersGameRoom)
+            this.dispatchRockPaperScissorsResults(playersGameRoom)
         }
     }
-    dispatchRockPaperScissorsWinner(gameRoom) {
+    dispatchRockPaperScissorsResults(gameRoom) {
         let players = gameRoom.rockPaperScissors
-        let winner = determineWinner(players[0].choice, players[1].choice)
-        winner = (winner === "p1") ? players[0].socket.id : players[1].socket.id
-
-        this.messageGameRoom(gameRoom.id, "RPC results", winner)
+        let results = determineWinner(players[0].choice, players[1].choice)
+        if(results === "draw") {
+            this.resetRockPaperScissors(gameRoom)
+        } else {
+            let winner = (results === "p1") ? players[0].socket.id : players[1].socket.id
+            this.messageGameRoom(gameRoom.id, "action", {type: "ROCK_PAPER_SCISSORS_WINNER", payload: winner})
+        }
+    }
+    resetRockPaperScissors(gameRoom) {
+        gameRoom.rockPaperScissors = []
+        console.log(colors.cyan(`gameRoom after draw: ${gameRoom}`))
+        this.messageGameRoom(gameRoom.id, "action", {type:"ROCK_PAPER_SCISSORS_DRAW"})        
     }
     findPlayersGameRoom(player) {
         let gameRoom
