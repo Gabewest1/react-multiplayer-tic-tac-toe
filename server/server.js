@@ -30,10 +30,12 @@ io.on("connection", (socket) => {
     socket.on("action", (action) => {
         console.log("Got my test to work!")
         switch(action.type) {
-            case "server/test":
-                socket.emit("action", {type: "SET_PLAYER", player: "player1", team: "x"})
             case "server/FIND_OPPONENT":
-                gameRoomManager.addPlayer(socket) 
+                gameRoomManager.addPlayer(socket)
+                break
+            case "server/ROCK_PAPER_SCISSOR_MOVE":
+                gameRoomManager.rockPaperScissors(socket, action.payload)
+                break
         }
     })
 })
