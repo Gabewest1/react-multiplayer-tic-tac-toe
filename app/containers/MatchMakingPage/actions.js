@@ -17,3 +17,9 @@ export function opponentLeft() {
         payload: false
     }
 }
+
+export function findOpponent() {
+    return {
+        type: "server/FIND_OPPONENT"
+    }
+}
