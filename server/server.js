@@ -20,23 +20,20 @@ app.get("/*", (req, res) => {
 const server= app.listen(8000, () => console.log("running on port 8000"))
 
 const io = socket(server)
+const gameRoomManager = new (require("./GameRoomManager"))(io)
 io.on("connection", (socket) => {
     console.log(`${socket.id} connected to the game`)
-    
-    socket.on("move", (data) => {
-        console.log(data)
-        socket.broadcast.emit("move", data)
-    })
-
-    socket.on("reset", () => {
-        io.emit("reset")
+    socket.on("disconnect", () => {
+        console.log(`${socket.id} disconnected`)
     })
 
     socket.on("action", (action) => {
         console.log("Got my test to work!")
         switch(action.type) {
-            case "test":
+            case "server/test":
                 socket.emit("action", {type: "SET_PLAYER", player: "player1", team: "x"})
+            case "server/FIND_OPPONENT":
+                gameRoomManager.addPlayer(socket) 
         }
     })
 })

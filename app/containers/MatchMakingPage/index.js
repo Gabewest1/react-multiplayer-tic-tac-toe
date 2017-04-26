@@ -1,17 +1,17 @@
 import React from "react"
 import { connect } from "react-redux"
+import { push } from "react-router-redux"
 import { bindActionCreators } from "redux"
 
 import Wrapper from "./Wrapper"
 import AnimatedSearchText from "components/MatchmakingSearchText"
 import * as actions from "./actions"
 
+import socket from "socket"
+
 class MatchMakingPage extends React.Component {
-    handleOpponentJoined() {
-        this.props.opponentJoined()
-    }
-    handleOpponentLeft() {
-        this.props.opponentLeft()
+    componentDidMount() {
+        this.props.findOpponent()
     }
     renderSearchingForOpponent() {
         return (
@@ -19,6 +19,7 @@ class MatchMakingPage extends React.Component {
         )
     }
     renderFoundOpponent() {
+        setTimeout(() => this.props.push("/ticTacToe"), 3000)
         return (
             <div>Found Opponent!</div>
         )
@@ -28,7 +29,6 @@ class MatchMakingPage extends React.Component {
         return (
             <Wrapper>
                 {this.props.foundOpponent ? this.renderFoundOpponent() : this.renderSearchingForOpponent()}
-                <button onClick={() => this.handleOpponentJoined()}>Find Opponent</button>
             </Wrapper>
         )
     }
@@ -41,7 +41,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators(actions, dispatch)
+    return bindActionCreators({
+        push,
+        ...actions
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MatchMakingPage)
