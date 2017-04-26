@@ -1,6 +1,6 @@
 const determineWinner = require("./rockPaperScissorsWinner")
 
-class GameManager {
+class GameRoomManager {
     constructor(serverSocket) {
         this.gameRooms = [];
         this.gameRoomCounter = 0;
@@ -9,7 +9,6 @@ class GameManager {
     addPlayer(player) {
         let gameRoom = this.getOpenGame()
         gameRoom.players.push(player)
-        this.messageGameRoom(gameRoom.id, "player joined")
         this.isGameRoomReady(gameRoom)
     }
     addSpectator(spectator) {
@@ -35,13 +34,13 @@ class GameManager {
     }
     isGameRoomReady(gameRoom) {
         if(gameRoom.players.length === 2) {
-            this.messageGameRoom(gameRoom.id, "game ready")
+            this.messageGameRoom(gameRoom.id, "action", {type: "FOUND_OPPONENT", payload: true})
         }
     }
     messageGameRoom(gameRoomId, eventName, data) {
         let gameRoom = this.gameRooms.filter(room => room.id === gameRoomId)[0]
-        gameRoom.players.forEach(player => this.socket.to(player.id).emit(eventName, data))
-        gameRoom.spectators.forEach(player => this.socket.to(player.id).emit(eventName, data))
+        gameRoom.players.forEach(player => player.emit(eventName, data))
+        gameRoom.spectators.forEach(player => player.emit(eventName, data))
     }
     getOpenGame() {
         let firstOpenGame;
@@ -89,4 +88,4 @@ class GameManager {
     }
 }
 
-module.exports = GameManager
+module.exports = GameRoomManager
