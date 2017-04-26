@@ -6,7 +6,7 @@ let Wrapper = styled.div`
     align-items: center;
     height: 100%;
 
-    @media (max-width: 480px) {
+    @media (max-width: 860px) {
         flex-direction: column
     }
 `

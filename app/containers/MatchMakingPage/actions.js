@@ -3,6 +3,7 @@ import {
     ERROR
 } from "./constants"
 
+
 export function opponentJoined() {
     return {
         type: FOUND_OPPONENT,

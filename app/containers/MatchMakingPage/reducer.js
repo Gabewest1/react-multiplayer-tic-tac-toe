@@ -9,7 +9,7 @@ let initialState = {
 }
 
 export default function matchMakingReducer(state = initialState, action) {
-    switch(action.state) {
+    switch(action.type) {
         case FOUND_OPPONENT:
             return {...state, foundOpponent: action.payload}
         case ERROR:
