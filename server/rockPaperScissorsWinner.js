@@ -1,5 +1,8 @@
 function determineWinner(p1, p2) {
     let winner;
+    p1 = p1.toLowerCase()
+    p2 = p2.toLowerCase()
+
     switch(p1) {
         case "rock": {
             if(p2 === "rock") {
