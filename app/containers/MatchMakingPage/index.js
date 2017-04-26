@@ -7,8 +7,6 @@ import Wrapper from "./Wrapper"
 import AnimatedSearchText from "components/MatchmakingSearchText"
 import * as actions from "./actions"
 
-import socket from "socket"
-
 class MatchMakingPage extends React.Component {
     componentDidMount() {
         this.props.findOpponent()
@@ -19,7 +17,7 @@ class MatchMakingPage extends React.Component {
         )
     }
     renderFoundOpponent() {
-        setTimeout(() => this.props.push("/ticTacToe"), 3000)
+        setTimeout(() => this.props.push("/rockPaperScissors"), 3000)
         return (
             <div>Found Opponent!</div>
         )
