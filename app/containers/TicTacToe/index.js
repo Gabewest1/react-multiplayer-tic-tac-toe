@@ -4,22 +4,24 @@ import { connect } from "react-redux"
 
 import TicTacToeBoard from "components/TicTacToeBoard"
 import Tile from "components/TicTacToeTile" 
+import Button from "./Button"
 import Wrapper from "./Wrapper"
 import Row from "./Row"
 
-import { setTile } from "./actions"
+import * as actions from "./actions"
 
 class TicTacToe extends React.Component {
     componentWillMount() {
-        console.log(this.props)
+        
     }
     handleClick(e) {
-        let { team } = this.props
-        let tile = e.target.getAttribute("data-tile")
-        console.log(tile)
-        props.setTile(tile, team)
+        let { team, currentPlayersTurn } = this.props
+        
+        if(currentPlayersTurn === team) {
+            let tile = e.target.getAttribute("data-tile")
+            this.props.setTile(tile, team)
+        }
     }
-
     createTiles() {
         let counter = 0
         return this.props.board.map((row, i) => {
@@ -40,11 +42,13 @@ class TicTacToe extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <Wrapper>
                 <TicTacToeBoard>
                     {this.createTiles()}
                 </TicTacToeBoard>
+                <Button onClick={this.props.resetGame.bind(this)}>Restart</Button>
             </Wrapper>
         )
     }
@@ -56,9 +60,7 @@ function mapStateToProps(state) {
     }
 }
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({
-        setTile
-    }, dispatch)
+    return bindActionCreators(actions, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicTacToe)
