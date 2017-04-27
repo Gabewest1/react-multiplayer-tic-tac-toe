@@ -28,13 +28,38 @@ io.on("connection", (socket) => {
     })
 
     socket.on("action", (action) => {
+        let gameRoom = gameRoomManager.findPlayersGameRoom(socket)
+
         switch(action.type) {
-            case "server/FIND_OPPONENT":
+            case "server/FIND_OPPONENT": {
                 gameRoomManager.addPlayer(socket)
                 break
-            case "server/ROCK_PAPER_SCISSORS_MOVE":
+            }
+            case "server/ROCK_PAPER_SCISSORS_MOVE": {
                 gameRoomManager.rockPaperScissors(socket, action.payload)
                 break
+            }
+            case "server/SET_TILE": {
+                let { tile, team } = action
+                gameRoomManager.messageGameRoom(gameRoom, "action", {type:"SET_TILE", tile, team})
+                break
+            }
+            case "server/SET_PLAYER": {
+                let { player, team } = action
+                gameRoomManager.messageGameRoom(gameRoom, "action", {type:"SET_PLAYER", player, team, name: socket.id})
+                break
+            }
+            case "server/RESET_TIC_TAC_TOE": {
+                gameRoomManager.messageGameRoom(gameRoom, "action", {type:"RESET_TIC_TAC_TOE"})
+                break
+            }
+            case "server/SET_CURRENT_PLAYER": {
+                let { players } = gameRoom
+                let player = players[0] === socket ? players[0] : players[1]
+                gameRoomManager.messageGameRoom(gameRoom, "action", {type: "SET_CURRENT_PLAYER", player})
+                break
+            }
+                
         }
     })
 })
