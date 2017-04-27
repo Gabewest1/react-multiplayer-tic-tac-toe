@@ -19,22 +19,23 @@ class RockPaperScissors extends React.Component {
 
     }
     renderRockPaperScissorsResult() {
-        if(this.props.winner) {
-            return handleWin.apply(this)
-        } else if(this.props.draw) {
-            return handleDraw.apply(this)
-        }
-
-        function handleWin() {
-            setTimeout(() => this.props.push("/ticTacToe"), 2000)
+        let props = this.props
+        if(props.won) {
+            setTimeout(() => props.push("/ticTacToe"), 2000)
+            props.handleWin()
             return (
-                <p>Winner is {this.props.winner}</p>
+                <p>Winner is {props.winner}</p>
             )
-        }
-        function handleDraw() {
-            setTimeout(() => this.props.resetRockPaperScissors(), 1500)
+        } else if(props.draw) {
+            setTimeout(() => props.resetRockPaperScissors(), 1500)
             return (
                 <p>Draw!!! Try Again!</p>
+            )
+        } else {
+            setTimeout(() => props.push("/ticTacToe"), 2000)            
+            props.handleLoss()
+            return (
+                <p>Winner is {props.winner}</p>
             )
         }
     }
