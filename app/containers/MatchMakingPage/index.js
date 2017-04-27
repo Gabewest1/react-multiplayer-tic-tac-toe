@@ -4,7 +4,7 @@ import { push } from "react-router-redux"
 import { bindActionCreators } from "redux"
 
 import Wrapper from "./Wrapper"
-import AnimatedSearchText from "components/MatchmakingSearchText"
+import AnimatedSearchText from "components/MatchMakingSearchText"
 import * as actions from "./actions"
 
 class MatchMakingPage extends React.Component {
