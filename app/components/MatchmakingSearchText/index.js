@@ -5,7 +5,6 @@ import Wrapper from "./Wrapper"
 export default class MatchmakingSearchText extends React.Component {
     handleClick(e) {
         let elements = document.getElementsByClassName("loading")
-        console.log(elements)
         for(var i=0; i<elements.length; i++) {
             let elem = elements[i]
             elem.style["animation-name"] = "loading"

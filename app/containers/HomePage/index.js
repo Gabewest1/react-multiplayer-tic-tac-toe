@@ -1,7 +1,7 @@
 import React from "react"
 
 import Wrapper from "./Wrapper"
-import Button from "./Button"
+import Button from "components/Button"
 
 export default class HomePage extends React.Component {
     render() {
