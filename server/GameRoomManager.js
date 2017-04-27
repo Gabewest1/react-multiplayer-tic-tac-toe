@@ -15,7 +15,6 @@ class GameRoomManager {
     addSpectator(spectator) {
         let gameRoom = this.getOpenGame()
         gameRoom.spectators.push(spectator)
-        this.messageGameRoom(gameRoom.id, "spectator joined")
     }
     createGameRoom() {
         let newGameRoom = {
@@ -27,19 +26,17 @@ class GameRoomManager {
         this.gameRooms.push(newGameRoom);
         return newGameRoom
     }
-    endGame(gameRoom) {
-        let playersRoom = this.gameRooms.filter(room => room.id === gameRoom.id)[0]
-        playersRoom.players.forEach(player => player.disconnect())
-        playersRoom.spectators.forEach(spectator => spectator.disconnect())
-        this.gameRooms = this.gameRooms.filter(room => room.id !== playersRoom.id)
+    endGameRoom(gameRoom) {
+        gameRoom.players.forEach(player => player.disconnect())
+        gameRoom.spectators.forEach(spectator => spectator.disconnect())
+        this.gameRooms = this.gameRooms.filter(room => room.id !== gameRoom.id)
     }
     isGameRoomReady(gameRoom) {
         if(gameRoom.players.length === 2) {
-            this.messageGameRoom(gameRoom.id, "action", {type: "FOUND_OPPONENT", payload: true})
+            this.messageGameRoom(gameRoom, "action", {type: "FOUND_OPPONENT", payload: true})
         }
     }
-    messageGameRoom(gameRoomId, eventName, data) {
-        let gameRoom = this.gameRooms.filter(room => room.id === gameRoomId)[0]
+    messageGameRoom(gameRoom, eventName, data) {
         gameRoom.players.forEach(player => player.emit(eventName, data))
         gameRoom.spectators.forEach(player => player.emit(eventName, data))
     }
@@ -71,18 +68,32 @@ class GameRoomManager {
     }
     dispatchRockPaperScissorsResults(gameRoom) {
         let players = gameRoom.rockPaperScissors
-        let results = determineWinner(players[0].choice, players[1].choice)
+        let player1 = players[0]
+        let player2 = players[1]
+
+        let results = determineWinner(player1.choice, player2.choice)
         if(results === "draw") {
             this.resetRockPaperScissors(gameRoom)
+        } else if(results === "p1") {
+            player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
+            player1.socket.emit("action", {type: "SET_TEAM", team: "x"})
+
+            player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
+            player2.socket.emit("action", {type: "SET_TEAM", team: "o"})
+            this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player1.socket.id})
         } else {
-            let winner = (results === "p1") ? players[0].socket.id : players[1].socket.id
-            this.messageGameRoom(gameRoom.id, "action", {type: "ROCK_PAPER_SCISSORS_WINNER", payload: winner})
+            player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
+            player1.socket.emit("action", {type: "SET_TEAM", team: "o"})
+
+            player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
+            player2.socket.emit("action", {type: "SET_TEAM", team: "x"}) 
+            this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player2.socket.id})
         }
     }
     resetRockPaperScissors(gameRoom) {
         gameRoom.rockPaperScissors = []
         console.log(colors.cyan(`gameRoom after draw: ${gameRoom}`))
-        this.messageGameRoom(gameRoom.id, "action", {type:"ROCK_PAPER_SCISSORS_DRAW"})        
+        this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_DRAW"})        
     }
     findPlayersGameRoom(player) {
         let gameRoom
