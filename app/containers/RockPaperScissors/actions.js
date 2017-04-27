@@ -1,9 +1,16 @@
 export function setPlayer(player, team) {
     return {
-        type: "SET_PLAYER",
+        type: "server/SET_PLAYER",
         player,
         team
     }
+}
+
+export function handleLoss() {
+    return setPlayer("player2", "o")
+}
+export function handleWin() {
+    return setPlayer("player1", "x")
 }
 
 export function rockPaperScissors(choice) {
