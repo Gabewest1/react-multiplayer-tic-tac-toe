@@ -61,7 +61,7 @@ io.on("connection", (socket) => {
                 break
             }
             case "server/END_TURN": {
-                gameRoomManager.messageGameRoom(gameRoom, "action", {type: "END_TURN", player})
+                gameRoomManager.messageGameRoom(gameRoom, "action", {type: "END_TURN"})
                 break                
             } 
 
