@@ -6,13 +6,12 @@ let initialState = {
     board: createBoard(),
     player1: {name: undefined, team: undefined, isPlayersTurn: undefined},
     player2: {name: undefined, team: undefined, isPlayersTurn: undefined},
-    currentPlayersTurn: "x",
-    team: undefined,
+    usersPlayer: undefined,
     gameOver: false,
-    winner: false,
+    winner: undefined,
     spectators: []
 }
-
+//
 export default function ticTacToeReducer(state = initialState, action) {
     switch(action.type) {
         case SET_TILE: 
@@ -30,13 +29,10 @@ export default function ticTacToeReducer(state = initialState, action) {
                     isPlayersTurn: action.isPlayersTurn
                 }
             }
-        case "SET_TEAM":
-            return {...state, team: action.team}
+        case "SET_USERS_PLAYER":
+            return {...state, usersPlayer: state[action.usersPlayer]}
         case "RESET_TIC_TAC_TOE":
             return {...state, board: createBoard(), currentPlayersTurn: "x"}
-        case "SET_CURRENT_PLAYER": {
-            return {...state, currentPlayersTurn: action.player}
-        }
         default:
             return state
     }
