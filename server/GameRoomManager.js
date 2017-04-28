@@ -58,8 +58,14 @@ class GameRoomManager {
     }
     rockPaperScissors(player, choice) {
         let playersGameRoom = this.findPlayersGameRoom(player)
-        console.log(`found players game room: ${playersGameRoom}`)
-        playersGameRoom.rockPaperScissors.push({socket: player, choice})
+
+        if(playersGameRoom.rockPaperScissors.filter(({socket}) => socket === player).length > 0) {
+            playersGameRoom.rockPaperScissors = 
+                playersGameRoom.rockPaperScissors.map((obj) => 
+                    obj.socket === player ? {socket: player, choice} : obj)
+        } else {
+            playersGameRoom.rockPaperScissors.push({socket: player, choice})
+        }
         
         if(playersGameRoom.rockPaperScissors.length === 2) {
             console.log("dispatching a winner")

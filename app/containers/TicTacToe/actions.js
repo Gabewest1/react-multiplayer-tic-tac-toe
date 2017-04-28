@@ -28,6 +28,6 @@ export function resetGame() {
 
 export function endTurn() {
     return {
-        type: "server/SET_CURRENT_PLAYER"
+        type: "server/END_TURN"
     }
 }

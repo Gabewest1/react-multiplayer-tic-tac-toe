@@ -17,8 +17,7 @@ export default function ticTacToeReducer(state = initialState, action) {
         case SET_TILE: 
             return {
                 ...state, 
-                board: setTile(state.board, action.tile, action.team), 
-                currentPlayersTurn: action.team === "x" ? "o" : "x"
+                board: setTile(state.board, action.tile, action.team)
             }
         case "SET_PLAYER": 
             return {
@@ -31,8 +30,14 @@ export default function ticTacToeReducer(state = initialState, action) {
             }
         case "SET_USERS_PLAYER":
             return {...state, usersPlayer: state[action.usersPlayer]}
+        case "END_TURN": {
+            let newState = {...state}
+            newState.player1.isPlayersTurn = !newState.player1.isPlayersTurn
+            newState.player2.isPlayersTurn = !newState.player2.isPlayersTurn
+            return newState
+        }
         case "RESET_TIC_TAC_TOE":
-            return {...state, board: createBoard(), currentPlayersTurn: "x"}
+            return {...state, board: createBoard()}
         default:
             return state
     }

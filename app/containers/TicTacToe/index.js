@@ -22,6 +22,7 @@ class TicTacToe extends React.Component {
         if(usersPlayer.isPlayersTurn) {
             let selectedTile = e.target.getAttribute("data-tile")
             this.props.setTile(selectedTile, usersPlayer.team)
+            this.props.endTurn()
         }
     }
     createTiles() {
