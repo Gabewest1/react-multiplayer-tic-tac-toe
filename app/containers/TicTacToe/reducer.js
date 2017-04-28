@@ -4,8 +4,8 @@ import {
 
 let initialState = {
     board: createBoard(),
-    player1: {name: undefined, team: undefined},
-    player2: {name: undefined, team: undefined},
+    player1: {name: undefined, team: undefined, isPlayersTurn: true},
+    player2: {name: undefined, team: undefined, isPlayersTurn: false},
     currentPlayersTurn: "x",
     team: undefined,
     gameOver: false,
@@ -22,7 +22,14 @@ export default function ticTacToeReducer(state = initialState, action) {
                 currentPlayersTurn: action.team === "x" ? "o" : "x"
             }
         case "SET_PLAYER": 
-            return {...state, [action.player]: {name: action.name, team: action.team}}
+            return {
+                ...state,
+                [action.player]: {
+                    name: action.name, 
+                    team: action.team, 
+                    isPlayersTurn: action.isPlayersTurn
+                }
+            }
         case "SET_TEAM":
             return {...state, team: action.team}
         case "RESET_TIC_TAC_TOE":
