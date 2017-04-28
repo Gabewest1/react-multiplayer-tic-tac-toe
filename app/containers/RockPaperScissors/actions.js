@@ -1,16 +1,17 @@
-export function setPlayer(player, team) {
+export function setPlayer(player, team, isPlayersTurn) {
     return {
         type: "server/SET_PLAYER",
         player,
-        team
+        team,
+        isPlayersTurn
     }
 }
 
 export function handleLoss() {
-    return setPlayer("player2", "o")
+    return setPlayer("player2", "o", false)
 }
 export function handleWin() {
-    return setPlayer("player1", "x")
+    return setPlayer("player1", "x", true)
 }
 
 export function rockPaperScissors(choice) {

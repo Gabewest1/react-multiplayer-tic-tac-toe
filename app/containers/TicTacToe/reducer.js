@@ -4,8 +4,8 @@ import {
 
 let initialState = {
     board: createBoard(),
-    player1: {name: undefined, team: undefined, isPlayersTurn: true},
-    player2: {name: undefined, team: undefined, isPlayersTurn: false},
+    player1: {name: undefined, team: undefined, isPlayersTurn: undefined},
+    player2: {name: undefined, team: undefined, isPlayersTurn: undefined},
     currentPlayersTurn: "x",
     team: undefined,
     gameOver: false,
