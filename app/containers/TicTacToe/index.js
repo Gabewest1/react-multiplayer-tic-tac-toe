@@ -17,11 +17,11 @@ class TicTacToe extends React.Component {
         
     }
     handleClick(e) {
-        let { team, currentPlayersTurn } = this.props
+        let { usersPlayer } = this.props
         
-        if(currentPlayersTurn === team) {
-            let tile = e.target.getAttribute("data-tile")
-            this.props.setTile(tile, team)
+        if(usersPlayer.isPlayersTurn) {
+            let selectedTile = e.target.getAttribute("data-tile")
+            this.props.setTile(selectedTile, usersPlayer.team)
         }
     }
     createTiles() {
