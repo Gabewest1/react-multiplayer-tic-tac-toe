@@ -17,12 +17,13 @@ class TicTacToe extends React.Component {
         
     }
     handleClick(e) {
-        let { usersPlayer } = this.props
+        let { usersPlayer, gameOver } = this.props
         
-        if(usersPlayer.isPlayersTurn) {
+        if(usersPlayer.isPlayersTurn && !gameOver) {
             let selectedTile = e.target.getAttribute("data-tile")
             this.props.setTile(selectedTile, usersPlayer.team)
             this.props.endTurn()
+            this.props.evaluateBoard()
         }
     }
     createTiles() {
@@ -45,14 +46,14 @@ class TicTacToe extends React.Component {
     }
 
     render() {
-        console.log(this.props)
-        let { player1, player2 } = this.props
+        let { player1, player2, gameOver } = this.props
         return (
             <Wrapper>
                 <PlayersNameDisplay players={[player1, player2]}/>
                 <TicTacToeBoard>
                     {this.createTiles()}
                 </TicTacToeBoard>
+                { gameOver ? (<div>Game Over!</div>) : null }
                 <Button onClick={this.props.resetGame.bind(this)}>Restart</Button>
             </Wrapper>
         )

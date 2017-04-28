@@ -30,7 +30,7 @@ const store = createStore(
     ...reducers,
     router: routerReducer,
   }),
-  composeWithDevTools(applyMiddleware(routeMiddleware, socketIoMiddleware, thunk))
+  composeWithDevTools(applyMiddleware(thunk, routeMiddleware, socketIoMiddleware))
 )
 
 ReactDOM.render(

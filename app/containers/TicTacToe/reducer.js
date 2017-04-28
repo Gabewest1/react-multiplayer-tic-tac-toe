@@ -37,7 +37,11 @@ export default function ticTacToeReducer(state = initialState, action) {
             return newState
         }
         case "RESET_TIC_TAC_TOE":
-            return {...state, board: createBoard()}
+            return {...state, board: createBoard(), gameOver: false, winner: undefined}
+        case "GAME_OVER":
+            return {...state, gameOver: true}
+        case "TIC_TAC_TOE_WINNER": 
+            return {...state, winner: action.winner, gameOver: true}
         default:
             return state
     }
