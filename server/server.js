@@ -45,8 +45,9 @@ io.on("connection", (socket) => {
                 break
             }
             case "server/SET_PLAYER": {
-                let { player, team } = action
-                gameRoomManager.messageGameRoom(gameRoom, "action", {type:"SET_PLAYER", player, team, name: socket.id})
+                let { player, team, isPlayersTurn } = action
+                let actionForReducer = {type:"SET_PLAYER", player, team, name: socket.id, isPlayersTurn}
+                gameRoomManager.messageGameRoom(gameRoom, "action", actionForReducer)
                 break
             }
             case "server/RESET_TIC_TAC_TOE": {
