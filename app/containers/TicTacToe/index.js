@@ -4,6 +4,8 @@ import { connect } from "react-redux"
 
 import TicTacToeBoard from "components/TicTacToeBoard"
 import Tile from "components/TicTacToeTile" 
+import PlayersNameDisplay from "components/PlayersNameDisplay"
+
 import Button from "./Button"
 import Wrapper from "./Wrapper"
 import Row from "./Row"
@@ -43,8 +45,10 @@ class TicTacToe extends React.Component {
 
     render() {
         console.log(this.props)
+        let { player1, player2 } = this.props
         return (
             <Wrapper>
+                <PlayersNameDisplay players={[player1, player2]}/>
                 <TicTacToeBoard>
                     {this.createTiles()}
                 </TicTacToeBoard>
