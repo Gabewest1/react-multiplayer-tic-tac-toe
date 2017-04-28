@@ -2,13 +2,16 @@ import React from "react"
 import styled from "styled-components"
 
 let Player = styled.div`
-    color: ${(props) => props.player.isPlayersTurn && "yellow"};
+    color: ${(props) => props.isPlayersTurn ? "yellow" : ""};
 `
 
 export default (props) => {
-    let { name } = props.player
+    let { name, team, isPlayersTurn } = props.player
+    if(name.length > 8) 
+        name = name.substring(0, 9)
+    
     return (
-        <Player>
+        <Player isPlayersTurn={isPlayersTurn}>
             {name}
         </Player>
     )
