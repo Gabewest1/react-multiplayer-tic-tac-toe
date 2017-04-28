@@ -8,7 +8,7 @@ let initialState = {
     player2: {name: undefined, team: undefined, isPlayersTurn: undefined},
     usersPlayer: undefined,
     gameOver: false,
-    winner: undefined,
+    winner: false,
     spectators: []
 }
 //

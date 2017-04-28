@@ -46,14 +46,14 @@ class TicTacToe extends React.Component {
     }
 
     render() {
-        let { player1, player2, gameOver } = this.props
+        let { player1, player2, gameOver, winner } = this.props
         return (
             <Wrapper>
                 <PlayersNameDisplay players={[player1, player2]}/>
                 <TicTacToeBoard>
                     {this.createTiles()}
                 </TicTacToeBoard>
-                { gameOver ? (<div>Game Over!</div>) : null }
+                { gameOver ? (<div>Game Over! {winner.name} Won!</div>) : null }
                 <Button onClick={this.props.resetGame.bind(this)}>Restart</Button>
             </Wrapper>
         )
