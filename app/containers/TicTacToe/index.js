@@ -23,7 +23,9 @@ class TicTacToe extends React.Component {
             let selectedTile = e.target.getAttribute("data-tile")
             this.props.setTile(selectedTile, usersPlayer.team)
             this.props.endTurn()
-            this.props.evaluateBoard()
+            //set timeout allows the setTile event to complete and update the players
+            //board, before trying to evaluate it
+            setTimeout( () => this.props.evaluateBoard(), 10)
         }
     }
     createTiles() {
