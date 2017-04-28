@@ -76,17 +76,11 @@ class GameRoomManager {
             this.resetRockPaperScissors(gameRoom)
         } else if(results === "p1") {
             player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
-            player1.socket.emit("action", {type: "SET_TEAM", team: "x"})
-
             player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
-            player2.socket.emit("action", {type: "SET_TEAM", team: "o"})
             this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player1.socket.id})
         } else {
             player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
-            player1.socket.emit("action", {type: "SET_TEAM", team: "o"})
-
             player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
-            player2.socket.emit("action", {type: "SET_TEAM", team: "x"}) 
             this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player2.socket.id})
         }
     }

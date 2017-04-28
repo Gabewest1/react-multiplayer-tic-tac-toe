@@ -1,9 +1,17 @@
 export function setPlayer(player, team, isPlayersTurn) {
-    return {
-        type: "server/SET_PLAYER",
-        player,
-        team,
-        isPlayersTurn
+    return (dispatch) => {
+        dispatch({
+            type: "server/SET_PLAYER",
+            player,
+            team,
+            isPlayersTurn
+        })
+        setTimeout(() => {
+            dispatch({
+                type: "SET_USERS_PLAYER",
+                usersPlayer: player
+            })
+        },2000)
     }
 }
 
