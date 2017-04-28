@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
+import multi from "redux-multi"
+import thunk from "redux-thunk"
 
 import socket from "./socket"
 import createSocketIoMiddleware from "redux-socket.io"
@@ -28,7 +30,7 @@ const store = createStore(
     ...reducers,
     router: routerReducer,
   }),
-  composeWithDevTools(applyMiddleware(routeMiddleware, socketIoMiddleware))
+  composeWithDevTools(applyMiddleware(routeMiddleware, socketIoMiddleware, thunk))
 )
 
 ReactDOM.render(

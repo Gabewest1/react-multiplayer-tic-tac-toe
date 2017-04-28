@@ -31,6 +31,7 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
+    "redux-multi": "^0.1.12",
     "redux-socket.io": "^1.4.0",
     "semantic-ui-icon": "^2.2.10",
     "socket.io": "^1.7.3",
