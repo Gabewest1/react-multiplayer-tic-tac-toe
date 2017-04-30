@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import board from "./board.png"
+import board from "assets/images/board.png"
 
 let Board = styled.div`
     background-image: url(${board});
