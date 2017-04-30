@@ -1,5 +1,7 @@
 import React from "react"
 import styled from "styled-components"
+import PlayerLogo from "./PlayerLogo"
+import CenteredWrapper from "./CenteredWrapper"
 
 let Player = styled.div`
     color: ${(props) => props.isPlayersTurn ? "yellow" : ""};
@@ -11,8 +13,11 @@ export default (props) => {
         name = name.substring(0, 9)
     
     return (
-        <Player isPlayersTurn={isPlayersTurn}>
-            {name}
-        </Player>
+        <CenteredWrapper>
+            <Player isPlayersTurn={isPlayersTurn}>
+                {name}
+            </Player>
+            <PlayerLogo team={team} />
+        </CenteredWrapper>
     )
 }
