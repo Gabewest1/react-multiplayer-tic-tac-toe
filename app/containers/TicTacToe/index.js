@@ -18,15 +18,20 @@ class TicTacToe extends React.Component {
     }
     handleClick(e) {
         let { usersPlayer, gameOver } = this.props
+        let selectedTile = e.target.getAttribute("data-tile")
         
-        if(usersPlayer.isPlayersTurn && !gameOver) {
-            let selectedTile = e.target.getAttribute("data-tile")
+        if(usersPlayer.isPlayersTurn && !gameOver && this.isTileEmpty(selectedTile)) {
             this.props.setTile(selectedTile, usersPlayer.team)
             this.props.endTurn()
             //set timeout allows the setTile event to complete and update the players
             //board, before trying to evaluate it
             setTimeout( () => this.props.evaluateBoard(), 10)
         }
+    }
+    isTileEmpty(tile) {
+        let row = Math.floor(tile / 3)
+        let column = tile - row*3
+        return this.props.board[row][column] === undefined ? true : false
     }
     createTiles() {
         let counter = 0
