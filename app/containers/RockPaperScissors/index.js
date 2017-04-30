@@ -4,6 +4,8 @@ import { connect } from "react-redux"
 import { push } from "react-router-redux"
 
 import Wrapper from "./Wrapper"
+import CenteredWrapper from "./CenteredWrapper"
+import RockPaperScissorsImage from "./RockPaperScissorsImage"
 import * as actions from "./actions"
 
 class RockPaperScissors extends React.Component {
@@ -14,8 +16,12 @@ class RockPaperScissors extends React.Component {
     }
     renderRockPaperScissorsGame() {
         let rockPaperScissors = ["Rock", "Paper", "Scissors"]
-        return rockPaperScissors.map((choice, i) => 
-            <div key={i} onClick={(e) => this.handleClick(e)}>{choice}</div>)
+        return rockPaperScissors.map((choice, i) => (
+            <CenteredWrapper key={i} onClick={(e) => this.handleClick(e)}>
+                <h1>{choice}</h1>
+                <RockPaperScissorsImage type={choice} />
+            </CenteredWrapper>)
+        )
 
     }
     renderRockPaperScissorsResult() {
