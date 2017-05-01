@@ -22,10 +22,11 @@ class TicTacToe extends React.Component {
         
         if(usersPlayer.isPlayersTurn && !gameOver && this.isTileEmpty(selectedTile)) {
             this.props.setTile(selectedTile, usersPlayer.team)
-            
+            this.props.endTurn()
+
             //set timeout allows the setTile event to complete and update the players
             //board, before trying to evaluate it
-            setTimeout( () => this.props.evaluateBoard(), 10)
+            setTimeout( () => this.props.evaluateBoard() , 100)
         }
     }
     isTileEmpty(tile) {

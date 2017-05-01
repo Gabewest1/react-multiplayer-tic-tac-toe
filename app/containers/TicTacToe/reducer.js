@@ -15,13 +15,22 @@ let initialState = {
 export default function ticTacToeReducer(state = initialState, action) {
     switch(action.type) {
         case SET_TILE: {
-            let newState = {
+            return {
                 ...state, 
                 board: setTile(state.board, action.tile, action.team)
             }
-            newState.player1.isPlayersTurn = !newState.player1.isPlayersTurn
-            newState.player2.isPlayersTurn = !newState.player2.isPlayersTurn
-            return newState
+        }
+        case "SET_PLAYER": {
+            console.log("In the reducer: SET_PLAYER")
+            
+            return {
+                ...state,
+                [action.player]: {
+                    name: action.name, 
+                    team: action.team, 
+                    isPlayersTurn: action.isPlayersTurn
+                }
+            }
         }
         case "SET_PLAYER": {
             console.log("In the reducer: SET_PLAYER")
@@ -38,9 +47,13 @@ export default function ticTacToeReducer(state = initialState, action) {
         case "SET_USERS_PLAYER": 
             return {...state, usersPlayer: state[action.usersPlayer]}
         case "END_TURN": {
-            let newState = {...state}
-            newState.player1.isPlayersTurn = !newState.player1.isPlayersTurn
-            newState.player2.isPlayersTurn = !newState.player2.isPlayersTurn
+            let newState = {
+                ...state,
+                player1: {...state.player1, isPlayersTurn: !state.player1.isPlayersTurn},
+                player2: {...state.player2, isPlayersTurn: !state.player2.isPlayersTurn},
+            }
+            let referenceToUsersPlayer = state.usersPlayer.name === state.player1.name ? "player1" : "player2"
+            newState.usersPlayer = newState[referenceToUsersPlayer]
             return newState
         }
         case "RESET_TIC_TAC_TOE":
