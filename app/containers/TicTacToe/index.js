@@ -22,7 +22,7 @@ class TicTacToe extends React.Component {
         
         if(usersPlayer.isPlayersTurn && !gameOver && this.isTileEmpty(selectedTile)) {
             this.props.setTile(selectedTile, usersPlayer.team)
-            this.props.endTurn()
+            
             //set timeout allows the setTile event to complete and update the players
             //board, before trying to evaluate it
             setTimeout( () => this.props.evaluateBoard(), 10)
@@ -56,7 +56,7 @@ class TicTacToe extends React.Component {
         let { player1, player2, gameOver, winner } = this.props
         return (
             <Wrapper>
-                <PlayersNameDisplay players={[player1, player2]}/>
+                <PlayersNameDisplay players={{player1, player2}}/>
                 <TicTacToeBoard>
                     {this.createTiles()}
                 </TicTacToeBoard>

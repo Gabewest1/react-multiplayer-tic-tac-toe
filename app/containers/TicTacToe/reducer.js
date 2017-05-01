@@ -35,10 +35,8 @@ export default function ticTacToeReducer(state = initialState, action) {
                 }
             }
         }
-        case "SET_USERS_PLAYER": {
-            console.log("In the reducer: SET_USERS_PLAYER")
+        case "SET_USERS_PLAYER": 
             return {...state, usersPlayer: state[action.usersPlayer]}
-        }
         case "END_TURN": {
             let newState = {...state}
             newState.player1.isPlayersTurn = !newState.player1.isPlayersTurn
