@@ -3,10 +3,11 @@ import Wrapper from "./Wrapper"
 import Player from "./Player"
 
 export default (props) => {
-    let players = props.players.map((player, i) => <Player key={i} player={player} />)
+    let { player1, player2 } = props.players
     return (
         <Wrapper>
-            {players}
+            <Player player={player1} />
+            <Player player={player2} />
         </Wrapper>
     )
 }
