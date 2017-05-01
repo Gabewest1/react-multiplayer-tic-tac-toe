@@ -23,7 +23,6 @@ class MatchMakingPage extends React.Component {
         )
     }
     render() {
-        console.log(this.props)
         return (
             <Wrapper>
                 {this.props.foundOpponent ? this.renderFoundOpponent() : this.renderSearchingForOpponent()}
