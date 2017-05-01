@@ -59,10 +59,12 @@ class GameRoomManager {
     rockPaperScissors(player, choice) {
         let playersGameRoom = this.findPlayersGameRoom(player)
 
-        if(playersGameRoom.rockPaperScissors.filter(({socket}) => socket === player).length > 0) {
-            playersGameRoom.rockPaperScissors = 
-                playersGameRoom.rockPaperScissors.map((obj) => 
-                    obj.socket === player ? {socket: player, choice} : obj)
+        let playerMadeMoveAlready = playersGameRoom.rockPaperScissors
+                                                        .filter( ({socket}) => socket === player)
+                                                        .length > 0
+        if(playerMadeMoveAlready) {
+            playersGameRoom.rockPaperScissors = playersGameRoom.rockPaperScissors.map((player) => 
+                    player.socket === player ? {socket: player, choice} : player)
         } else {
             playersGameRoom.rockPaperScissors.push({socket: player, choice})
         }
@@ -78,13 +80,17 @@ class GameRoomManager {
         let player2 = players[1]
 
         let results = determineWinner(player1.choice, player2.choice)
+        console.log(player1.socket.id + " choose " + player1.choice)
+        console.log(player2.socket.id + " choose " + player2.choice)
         if(results === "draw") {
             this.resetRockPaperScissors(gameRoom)
         } else if(results === "p1") {
+            console.log("Winner: " + player1.socket.id)
             player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
             player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
             this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player1.socket.id})
         } else {
+            console.log("Winner: " + player2.socket.id)            
             player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
             player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
             this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player2.socket.id})
