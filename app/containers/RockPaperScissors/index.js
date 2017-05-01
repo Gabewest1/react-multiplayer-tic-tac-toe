@@ -9,15 +9,13 @@ import RockPaperScissorsImage from "./RockPaperScissorsImage"
 import * as actions from "./actions"
 
 class RockPaperScissors extends React.Component {
-    handleClick(e) {
-        let choice = e.target.textContent
+    handleClick(choice) {
         this.props.rockPaperScissors(choice)
-        console.log(this.props)
     }
     renderRockPaperScissorsGame() {
         let rockPaperScissors = ["Rock", "Paper", "Scissors"]
         return rockPaperScissors.map((choice, i) => (
-            <CenteredWrapper key={i} onClick={(e) => this.handleClick(e)}>
+            <CenteredWrapper key={i} onClick={(e) => this.handleClick(choice)}>
                 <h1>{choice}</h1>
                 <RockPaperScissorsImage type={choice} />
             </CenteredWrapper>)
