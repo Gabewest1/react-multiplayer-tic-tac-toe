@@ -21,7 +21,6 @@ export default class MatchmakingSearchText extends React.Component {
             )
             return $animatedSpan
         })
-        console.log(text)
         return text
     }
     render() {
