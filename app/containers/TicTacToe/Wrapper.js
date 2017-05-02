@@ -6,7 +6,7 @@ let Wrapper = styled.div`
     justify-content: space-around;
     align-items: center;
     height: 100%;
-
+    text-align: center;
 `
 
 export default Wrapper

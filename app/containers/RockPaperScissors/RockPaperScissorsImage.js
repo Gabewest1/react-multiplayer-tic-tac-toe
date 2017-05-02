@@ -6,8 +6,8 @@ import Paper from "assets/images/paper.png"
 import Scissors from "assets/images/scissors.png"
 
 let RockPaperScissorsImage = styled.img`
-    width: 100%;
-    height:100%;
+    max-width: 100%;
+    max-height: 100%;
 `
 
 export default (props) => {

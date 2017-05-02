@@ -3,18 +3,33 @@ import styled from "styled-components"
 import Link from "components/Link"
 
 let Button = styled.button `
+    background-image: url(assets/images/button--chalk.png);
+    background-size: 100% 100%;
     background-color: transparent;
-    color: white;
+    border: none;
     width: 320px;
     height: 85px;
-    border-radius: 10px;
-    border: solid 8px white;
-    margin: 50px
+    
     font-size: 30px;
 `
+//arr = [1,2,3] => ...arr => 1,2,3
+export default (props) => {
+    let shouldRenderWithALink = props.to ? true : false
+    let ButtonToRender
 
-export default (props) => (
-    <Button>
-        <Link to={props.to}>{props.children}</Link>
-    </Button>
-)
+    if(shouldRenderWithALink) {
+        ButtonToRender = (
+            <Button {...props}>
+                <Link to={props.to}>{props.children}</Link>
+            </Button>
+        )
+    } else {
+        ButtonToRender = (
+            <Button {...props}>{props.children}</Button>
+        )
+    }
+    ButtonToRender = ButtonToRender
+    console.log(ButtonToRender)
+    console.log(Button)
+    return ButtonToRender
+}

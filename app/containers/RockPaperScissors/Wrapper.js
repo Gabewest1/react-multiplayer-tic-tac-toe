@@ -2,14 +2,9 @@ import styled from "styled-components"
 
 let Wrapper = styled.div`
     height: 100%
-    color: white
     display: flex
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-
-    div {
-        margin: 30px;
-    }
 `
 
 export default Wrapper
