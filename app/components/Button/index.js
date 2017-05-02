@@ -12,7 +12,7 @@ let Button = styled.button `
     
     font-size: 30px;
 `
-//arr = [1,2,3] => ...arr => 1,2,3
+
 export default (props) => {
     let shouldRenderWithALink = props.to ? true : false
     let ButtonToRender
