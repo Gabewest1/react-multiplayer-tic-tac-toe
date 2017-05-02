@@ -28,8 +28,6 @@ export default (props) => {
             <Button {...props}>{props.children}</Button>
         )
     }
-    ButtonToRender = ButtonToRender
-    console.log(ButtonToRender)
-    console.log(Button)
+    
     return ButtonToRender
 }
