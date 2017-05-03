@@ -9,7 +9,6 @@ let initialState = {
     usersPlayer: undefined,
     gameOver: false,
     winner: false,
-    isOnlineMatch: false,
     spectators: []
 }
 
@@ -43,8 +42,6 @@ export default function ticTacToeReducer(state = initialState, action) {
         }
         case "SET_USERS_PLAYER": 
             return {...state, usersPlayer: state[action.usersPlayer]}
-        case "FOUND_OPPONENT": 
-            return {...state, isOnlineMatch: true}
         case "END_TURN": {
             let newState = {
                 ...state,
