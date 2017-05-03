@@ -55,7 +55,8 @@ class RockPaperScissors extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.rockPaperScissors
+        ...state.rockPaperScissors,
+        ...state.matchMaking
     }
 }
 function mapDispatchToProps(dispatch) {
