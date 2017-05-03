@@ -5,13 +5,14 @@ import {
 
 let initialState = {
     foundOpponent: false,
+    isOnlineMatch: false,
     error: false
 }
 
 export default function matchMakingReducer(state = initialState, action) {
     switch(action.type) {
         case FOUND_OPPONENT:
-            return {...state, foundOpponent: action.payload}
+            return {...state, foundOpponent: true, isOnlineMatch: true}
         case ERROR:
             return {...state, error: true}
         default:
