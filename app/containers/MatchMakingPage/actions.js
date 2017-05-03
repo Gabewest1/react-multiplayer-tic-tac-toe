@@ -5,9 +5,15 @@ import {
 
 
 export function opponentJoined() {
-    return {
-        type: FOUND_OPPONENT,
-        payload: true
+    return (dispatch) => {
+        dispatch({
+            type: FOUND_OPPONENT,
+            payload: true
+        })
+        dispatch({
+            type: "SET_IS_ONLINE_MATCH",
+            payload: true
+        })
     }
 }
 

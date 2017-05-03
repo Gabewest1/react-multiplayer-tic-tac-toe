@@ -3,28 +3,43 @@ import {
 } from "./constants"
 
 export function setTile(tile, team) {
-    return {
-        type: "server/SET_TILE",
-        tile,
-        team
+    return (dispatch, getState) => {
+        let { isOnlineMatch } = getState().ticTacToe
+        let type = isOnlineMatch ? "server/SET_TILE" : "SET_TILE"
+
+        dispatch({
+            type,
+            tile,
+            team
+        })
     }
 }
 
 export function resetGame() {
-    return {
-        type: "server/RESET_TIC_TAC_TOE"
+    return (dispatch, getState) => {
+        let { isOnlineMatch } = getState().ticTacToe
+        let type = isOnlineMatch ? "server/RESET_TIC_TAC_TOE" : "RESET_TIC_TAC_TOE"
+        
+        dispatch({
+            type
+        })
     }
 }
 
 export function endTurn() {
-    return {
-        type: "server/END_TURN"
+    return (dispatch, getState) => {
+        let { isOnlineMatch } = getState().ticTacToe
+        let type = isOnlineMatch ? "server/END_TURN" : "END_TURN"
+        
+        dispatch({
+            type
+        })
     }
 }
 
 export function evaluateBoard() {
     return (dispatch, getState) => {
-        let { board, usersPlayer } = getState().ticTacToe 
+        let { board, usersPlayer, isOnlineMatch } = getState().ticTacToe 
         let winningPaths = [
             [0,1,2],
             [3,4,5],
@@ -53,8 +68,8 @@ export function evaluateBoard() {
         })
 
         if(didPlayerWin) {
-            console.log("PLAYER1 WON")
-            dispatch({type: "server/TIC_TAC_TOE_WINNER", winner: usersPlayer})
+            let type = isOnlineMatch ?  "server/TIC_TAC_TOE_WINNER" : "TIC_TAC_TOE_WINNER"
+            dispatch({type, winner: usersPlayer})
         } 
     }
 }

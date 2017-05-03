@@ -9,9 +9,10 @@ let initialState = {
     usersPlayer: undefined,
     gameOver: false,
     winner: false,
+    isOnlineMatch: false,
     spectators: []
 }
-//
+
 export default function ticTacToeReducer(state = initialState, action) {
     switch(action.type) {
         case SET_TILE: {
@@ -20,9 +21,7 @@ export default function ticTacToeReducer(state = initialState, action) {
                 board: setTile(state.board, action.tile, action.team)
             }
         }
-        case "SET_PLAYER": {
-            console.log("In the reducer: SET_PLAYER")
-            
+        case "SET_PLAYER": {            
             return {
                 ...state,
                 [action.player]: {
@@ -33,8 +32,6 @@ export default function ticTacToeReducer(state = initialState, action) {
             }
         }
         case "SET_PLAYER": {
-            console.log("In the reducer: SET_PLAYER")
-            
             return {
                 ...state,
                 [action.player]: {
@@ -46,6 +43,8 @@ export default function ticTacToeReducer(state = initialState, action) {
         }
         case "SET_USERS_PLAYER": 
             return {...state, usersPlayer: state[action.usersPlayer]}
+        case "FOUND_OPPONENT": 
+            return {...state, isOnlineMatch: true}
         case "END_TURN": {
             let newState = {
                 ...state,
