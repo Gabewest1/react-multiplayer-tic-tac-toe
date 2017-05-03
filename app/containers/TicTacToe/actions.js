@@ -4,7 +4,7 @@ import {
 
 export function setTile(tile, team) {
     return (dispatch, getState) => {
-        let { isOnlineMatch } = getState().ticTacToe
+        let { isOnlineMatch } = getState().matchMaking
         let type = isOnlineMatch ? "server/SET_TILE" : "SET_TILE"
 
         dispatch({
@@ -17,7 +17,7 @@ export function setTile(tile, team) {
 
 export function resetGame() {
     return (dispatch, getState) => {
-        let { isOnlineMatch } = getState().ticTacToe
+        let { isOnlineMatch } = getState().matchMaking
         let type = isOnlineMatch ? "server/RESET_TIC_TAC_TOE" : "RESET_TIC_TAC_TOE"
         
         dispatch({
@@ -28,7 +28,7 @@ export function resetGame() {
 
 export function endTurn() {
     return (dispatch, getState) => {
-        let { isOnlineMatch } = getState().ticTacToe
+        let { isOnlineMatch } = getState().matchMaking
         let type = isOnlineMatch ? "server/END_TURN" : "END_TURN"
         
         dispatch({
@@ -39,7 +39,7 @@ export function endTurn() {
 
 export function evaluateBoard() {
     return (dispatch, getState) => {
-        let { board, usersPlayer, isOnlineMatch } = getState().ticTacToe 
+        let { board, usersPlayer, isOnlineMatch } = getState().matchMaking 
         let winningPaths = [
             [0,1,2],
             [3,4,5],
