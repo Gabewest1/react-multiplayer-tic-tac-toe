@@ -23,9 +23,14 @@ export function handleWin() {
 }
 
 export function rockPaperScissors(choice) {
-    return {
-        type: "server/ROCK_PAPER_SCISSORS_MOVE",
-        payload: choice
+    return (dispatch, getState) => {
+        let isOnlineMatch = getState().matchMaking
+        let type = isOnlineMatch ? "server/ROCK_PAPER_SCISSORS_MOVE" : "ROCK_PAPER_SCISSORS_MOVE"
+        
+        dispatch({
+            type,
+            payload: choice
+        })
     }
 }
 
