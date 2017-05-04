@@ -39,7 +39,9 @@ export function endTurn() {
 
 export function evaluateBoard() {
     return (dispatch, getState) => {
-        let { board, usersPlayer, isOnlineMatch } = getState().matchMaking 
+        let { board, usersPlayer } = getState().ticTacToe
+        let { isOnlineMatch } = getState().matchMaking
+         
         let winningPaths = [
             [0,1,2],
             [3,4,5],

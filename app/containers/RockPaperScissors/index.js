@@ -4,8 +4,8 @@ import { connect } from "react-redux"
 import { push } from "react-router-redux"
 
 import Wrapper from "./Wrapper"
-import RockPaperScissorsOption from "./RockPaperScissorsOption"
-import RockPaperScissorsImage from "./RockPaperScissorsImage"
+import RockPaperScissorsOptions from "components/RockPaperScissorsOptions"
+
 import * as actions from "./actions"
 
 class RockPaperScissors extends React.Component {
@@ -13,14 +13,8 @@ class RockPaperScissors extends React.Component {
         this.props.rockPaperScissors(choice)
     }
     renderRockPaperScissorsGame() {
-        let rockPaperScissors = ["Rock", "Paper", "Scissors"]
-        return rockPaperScissors.map((choice, i) => (
-            <RockPaperScissorsOption key={i} onClick={(e) => this.handleClick(choice)}>
-                <h1>{choice}</h1>
-                <RockPaperScissorsImage type={choice} />
-            </RockPaperScissorsOption>)
-        )
-
+        let arr = [1,2]
+        return arr.map((val, i) => <RockPaperScissorsOptions key={i} onClick={this.handleClick.bind(this)}/>)        
     }
     renderRockPaperScissorsResult() {
         let props = this.props

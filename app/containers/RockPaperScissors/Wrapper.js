@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
 let Wrapper = styled.div`
-    height: 100%
-    display: flex
-    justify-content: space-around;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
 `
 

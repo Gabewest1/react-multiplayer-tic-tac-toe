@@ -7,7 +7,8 @@ import Scissors from "assets/images/scissors.png"
 
 let RockPaperScissorsImage = styled.img`
     max-width: 100%;
-    max-height: 100%;
+    max-height: 180px;
+    height: auto;
 `
 
 export default (props) => {
@@ -16,8 +17,9 @@ export default (props) => {
         "paper": Paper,
         "scissors": Scissors
     }
-    let {type} = props
-    let imgSrc = choices[type.toLowerCase()]
+    let type = props.type.toLowerCase()
+    let imgSrc = choices[type]
+    console.log("inside rps image", props)
     return (
         <RockPaperScissorsImage src={imgSrc} alt={type} />
     )
