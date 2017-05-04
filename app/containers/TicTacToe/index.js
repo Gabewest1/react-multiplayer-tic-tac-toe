@@ -6,7 +6,7 @@ import TicTacToeBoard from "components/TicTacToeBoard"
 import Tile from "components/TicTacToeTile" 
 import PlayersNameDisplay from "components/PlayersNameDisplay"
 
-import Button from "./Button"
+import ResetButton from "./ResetButton"
 import Wrapper from "./Wrapper"
 import Row from "./Row"
 
@@ -62,7 +62,7 @@ class TicTacToe extends React.Component {
                     {this.createTiles()}
                 </TicTacToeBoard>
                 { gameOver ? (<div>Game Over! {winner.name} Won!</div>) : null }
-                <Button onClick={this.props.resetGame.bind(this)}>Restart</Button>
+                <ResetButton onClick={this.props.resetGame.bind(this)}>Restart</ResetButton>
             </Wrapper>
         )
     }
