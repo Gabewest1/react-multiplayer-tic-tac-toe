@@ -3,7 +3,9 @@ let initialState = {
     winner: false,
     won: false,
     loss: false,
-    draw: false
+    draw: false,
+    usersSelection: "rock",
+    opponentsSelection: "paper"
 }
 
 export default function(state = initialState, action) {
@@ -18,6 +20,10 @@ export default function(state = initialState, action) {
             return {...state, results: true, draw: true}
         case "ROCK_PAPER_SCISSORS_RESET":
             return initialState
+        case "SET_USERS_SELECTION":
+            return {...state, usersSelection: action.payload}
+        case "SET_OPPONENTS_SELECTION":
+            return {...state, usersSelection: action.payload}
         default: 
             return state
     }
