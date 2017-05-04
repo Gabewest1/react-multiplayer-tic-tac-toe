@@ -5,15 +5,32 @@ import { push } from "react-router-redux"
 
 import Wrapper from "./Wrapper"
 import RockPaperScissorsOptions from "components/RockPaperScissorsOptions"
+import RockPaperScissorsImage from "components/RockPaperScissorsImage"
 
 import * as actions from "./actions"
 
+import styled from "styled-components"
+const Hidden = styled.div`
+    display: ;
+`
 class RockPaperScissors extends React.Component {
     handleClick(choice) {
         this.props.rockPaperScissors(choice)
     }
     renderRockPaperScissorsGame() {
         let arr = [1,2]
+        return (
+            <Wrapper>
+                <RockPaperScissorsOptions onClick={this.handleClick.bind(this)}/>
+                <Hidden>
+                    <RockPaperScissorsImage type={this.props.usersSelection}/>
+                </Hidden>
+                <Hidden>
+                    <RockPaperScissorsImage type={this.props.opponentsSelection}/>
+                </Hidden>
+                <RockPaperScissorsOptions onClick={this.handleClick.bind(this)}/>
+            </Wrapper>
+        )
         return arr.map((val, i) => <RockPaperScissorsOptions key={i} onClick={this.handleClick.bind(this)}/>)        
     }
     renderRockPaperScissorsResult() {
