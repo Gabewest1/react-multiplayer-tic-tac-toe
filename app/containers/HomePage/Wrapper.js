@@ -6,20 +6,10 @@ let Wrapper = styled.div`
     align-items: center;
     height: 100%;
 
-    button {
-        width: 400px;
-        height: 120px;
-    }
     @media (max-width: 860px) {
         flex-direction: column
-        justify-content: center;
+        justify-content: space-around;
 
-        button {
-            margin-bottom:100px;
-        }
-        button:last-child {
-            margin:0;
-        }
     }
     @media (max-width: 480px) {
         button {
