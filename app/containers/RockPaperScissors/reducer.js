@@ -4,8 +4,8 @@ let initialState = {
     won: false,
     loss: false,
     draw: false,
-    usersSelection: "rock",
-    opponentsSelection: "paper"
+    usersSelection: undefined,
+    opponentsSelection: undefined
 }
 
 export default function(state = initialState, action) {
@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
         case "SET_USERS_SELECTION":
             return {...state, usersSelection: action.payload}
         case "SET_OPPONENTS_SELECTION":
-            return {...state, usersSelection: action.payload}
+            return {...state, opponentsSelection: action.payload}
         default: 
             return state
     }

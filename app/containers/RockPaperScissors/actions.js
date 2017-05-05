@@ -31,6 +31,16 @@ export function rockPaperScissors(choice) {
             type,
             payload: choice
         })
+        dispatch({
+            type: "SET_USERS_SELECTION",
+            payload: choice
+        })
+        if(isOnlineMatch) {
+            dispatch({
+                type: "server/SET_OPPONENTS_SELECTION",
+                payload: choice
+            })
+        }
     }
 }
 

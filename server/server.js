@@ -68,6 +68,10 @@ io.on("connection", (socket) => {
                 let actionForReducer = {type: "TIC_TAC_TOE_WINNER", winner: action.winner}
                 gameRoomManager.messageGameRoom(gameRoom, "action", actionForReducer)
             }
+            case "server/SET_OPPONENTS_SELECTION": {
+                gameRoomManager.messageGameRoom(gameRoom, "action", {type: "SET_OPPONENTS_SELECTION", payload: action.payload})
+                socket.emit("action", {type: "SET_OPPONENTS_SELECTION", payload: undefined})                
+            }
         }
     })
 })
