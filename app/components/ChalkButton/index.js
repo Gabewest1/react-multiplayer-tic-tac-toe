@@ -2,15 +2,20 @@ import React from "react"
 import styled from "styled-components"
 import Link from "components/Link"
 
-let Button = styled.button `
+let Button = styled.div`
     background-image: url(assets/images/button--chalk.png);
     background-size: 100% 100%;
     background-color: transparent;
     border: none;
-    width: 320px;
-    height: 85px;
-    
-    font-size: 30px;
+    width: 400px;
+    height: 120px;
+    padding: 10px 15px;
+    font-size: 50px;
+
+    @media (max-width: 480px) {
+        width: 280px;
+        height: 84px;
+    }
 `
 
 export default (props) => {
