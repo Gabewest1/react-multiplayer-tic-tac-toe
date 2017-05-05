@@ -4,34 +4,30 @@ import { connect } from "react-redux"
 import { push } from "react-router-redux"
 
 import Wrapper from "./Wrapper"
+import RockPaperScissorsSelections from "./RockPaperScissorsSelections"
 import RockPaperScissorsOptions from "components/RockPaperScissorsOptions"
 import RockPaperScissorsImage from "components/RockPaperScissorsImage"
+import AnimatedText from "components/MatchMakingSearchText"
 
 import * as actions from "./actions"
 
-import styled from "styled-components"
-const Hidden = styled.div`
-    display: ;
-`
 class RockPaperScissors extends React.Component {
     handleClick(choice) {
         this.props.rockPaperScissors(choice)
     }
     renderRockPaperScissorsGame() {
-        let arr = [1,2]
+        let OpponentsRockPaperScissorsMove = 
+                    this.props.opponentsSelection ? <RockPaperScissorsImage /> 
+                                                  : <AnimatedText>Opponent is deciding...</AnimatedText>
         return (
             <Wrapper>
                 <RockPaperScissorsOptions onClick={this.handleClick.bind(this)}/>
-                <Hidden>
+                <RockPaperScissorsSelections>
                     <RockPaperScissorsImage type={this.props.usersSelection}/>
-                </Hidden>
-                <Hidden>
-                    <RockPaperScissorsImage type={this.props.opponentsSelection}/>
-                </Hidden>
-                <RockPaperScissorsOptions onClick={this.handleClick.bind(this)}/>
+                    { OpponentsRockPaperScissorsMove }
+                </RockPaperScissorsSelections>
             </Wrapper>
         )
-        return arr.map((val, i) => <RockPaperScissorsOptions key={i} onClick={this.handleClick.bind(this)}/>)        
     }
     renderRockPaperScissorsResult() {
         let props = this.props
