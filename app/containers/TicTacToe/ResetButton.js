@@ -1,7 +1,7 @@
 import styled from "styled-components"
-import Button from "components/Button"
+import ChalkButton from "components/ChalkButton"
 
-let ResetButton = styled(Button) `
+let ResetButton = styled(ChalkButton) `
     width: 200px;
     font-size: 22px;
 `
