@@ -7,6 +7,7 @@ let initialState = {
     player1: {name: undefined, team: undefined, isPlayersTurn: undefined},
     player2: {name: undefined, team: undefined, isPlayersTurn: undefined},
     usersPlayer: undefined,
+    computersPlayer: undefined,
     gameOver: false,
     winner: false,
     spectators: []
@@ -21,16 +22,6 @@ export default function ticTacToeReducer(state = initialState, action) {
             }
         }
         case "SET_PLAYER": {            
-            return {
-                ...state,
-                [action.player]: {
-                    name: action.name, 
-                    team: action.team, 
-                    isPlayersTurn: action.isPlayersTurn
-                }
-            }
-        }
-        case "SET_PLAYER": {
             return {
                 ...state,
                 [action.player]: {

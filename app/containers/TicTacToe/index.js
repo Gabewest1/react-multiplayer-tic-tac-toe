@@ -23,11 +23,88 @@ class TicTacToe extends React.Component {
         if(usersPlayer.isPlayersTurn && !gameOver && this.isTileEmpty(selectedTile)) {
             this.props.setTile(selectedTile, usersPlayer.team)
             this.props.endTurn()
+            
 
             //set timeout allows the setTile event to complete and update the players
-            //board, before trying to evaluate it
-            setTimeout( () => this.props.evaluateBoard() , 100)
+            //board, before trying to evaluate it for a winner
+            setTimeout( () => this.props.evaluateBoard(), 100)
         }
+    }
+    performComputersTurn() {
+        let computersNextMoveIndex = undefined
+        let { board, usersPlayer, computersPlayer } = this.props         
+        let winningPaths = [
+            [0,1,2],
+            [3,4,5],
+            [6,7,8],
+            [0,3,6],
+            [1,4,7],
+            [2,5,8],
+            [0,4,8],
+            [6,4,2]
+        ]
+
+        let usersSelectedTileIndexes = board.reduce((selectedIndexes, row, i) => {
+            row.forEach((tile, j) => {
+                if(tile === usersPlayer.team) {
+                    selectedIndexes.push(i*3 + j)
+                }
+            })
+            return selectedIndexes
+        }, [])
+        let computersSelectedTileIndexes = board.reduce((selectedIndexes, row, i) => {
+            row.forEach((tile, j) => {
+                if(tile === computersPlayer.team) {
+                    selectedIndexes.push(i*3 + j)
+                }
+            })
+            return selectedIndexes
+        }, [])
+
+        //Search for a move that can either: 1)win the computer the game. 2)stop the player from winning.
+        //3)pick a random tile. In that order. 
+        computersNextMoveIndex = this.findWinningMove(winningPaths, computersSelectedTileIndexes)
+        computersNextMoveIndex = computersNextMoveIndex || this.findBlockingMove(winningPaths, usersSelectedTileIndexes)
+        computersNextMoveIndex = computersNextMoveIndex || this.getRandomEmptyTile(usersSelectedTileIndexes, computersSelectedTileIndexes)
+
+        if(!computersNextMoveIndex) {
+            let possibleTileIndexes = [0,1,2,3,4,5,6,7,8]
+            let openTiles = possibleTileIndexes.filter(tile => !usersSelectedTileIndexes.includes(tile))
+                                               .filter(tile => !computersSelectedTileIndexes.includes(tile))
+            computersNextMoveIndex = openTiles[0]
+        }
+
+        this.props.setTile(computersNextMoveIndex, computersPlayer.team)
+    }
+    findWinningMove(winningPaths, computersSelectedTileIndexes) {
+        let computersNextMoveIndex = undefined
+        winningPaths.forEach(path => {
+            let computersMatches = path.filter(tile => computersSelectedTileIndexes.includes(tile))
+            if(computersMatches.length === 2 && !computersNextMoveIndex) {
+                let openTile = path.filter(tile => !computersMatches.includes(tile))[0]
+                computersNextMoveIndex = this.isTileEmpty(openTile) ? openTile : undefined 
+            }
+        })
+        return computersNextMoveIndex
+    }
+    findBlockingMove(winningPaths, usersSelectedTileIndexes) {
+        let computersNextMoveIndex = undefined
+        winningPaths.forEach(path => {
+            let p1Matches = path.filter(tile => usersSelectedTileIndexes.includes(tile))
+            if(p1Matches.length === 2 && !computersNextMoveIndex) {
+                let openTile = path.filter(tile => !p1Matches.includes(tile))[0]
+                computersNextMoveIndex = this.isTileEmpty(openTile) ? openTile : undefined 
+            }
+        })
+        return computersNextMoveIndex
+    }
+    getRandomEmptyTile(usersSelectedTileIndexes, computersSelectedTileIndexes) {
+        let computersNextMoveIndex = undefined
+        let possibleTileIndexes = [0,1,2,3,4,5,6,7,8]
+        let openTiles = possibleTileIndexes.filter(tile => !usersSelectedTileIndexes.includes(tile))
+                                            .filter(tile => !computersSelectedTileIndexes.includes(tile))
+        computersNextMoveIndex = openTiles[0]
+        return computersNextMoveIndex
     }
     isTileEmpty(tile) {
         let row = Math.floor(tile / 3)
