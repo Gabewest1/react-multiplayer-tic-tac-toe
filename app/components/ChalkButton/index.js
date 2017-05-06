@@ -11,6 +11,9 @@ let Button = styled.div`
     height: 120px;
     padding: 10px 15px;
     font-size: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 
     @media (max-width: 480px) {
         width: 280px;
