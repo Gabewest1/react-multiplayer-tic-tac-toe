@@ -3,7 +3,11 @@ const webpack = require("webpack")
 
 module.exports = {
     devtool: "source-map",
-    entry: "./app/app.js",
+    entry: [
+        'webpack/hot/dev-server',
+        'webpack-hot-middleware/client',
+        "./app/app.js"
+    ],
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, "app"),
@@ -17,7 +21,8 @@ module.exports = {
                 test: /\.jsx?/,
                 loader: "babel-loader",
                 options: {
-                    presets: ["react", "es2015", "stage-0"]
+                    presets: ["react", "es2015", "stage-0"],
+                    plugins: ["react-hot-loader/babel"]
                 }
             },
             {
