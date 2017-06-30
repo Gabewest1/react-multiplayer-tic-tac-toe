@@ -21,18 +21,28 @@ class TicTacToe extends React.Component {
         let selectedTile = e.target.getAttribute("data-tile")
         
         if(usersPlayer.isPlayersTurn && !gameOver && this.isTileEmpty(selectedTile)) {
-            this.props.setTile(selectedTile, usersPlayer.team)
-            this.props.endTurn()
-            
-
-            //set timeout allows the setTile event to complete and update the players
-            //board, before trying to evaluate it for a winner
-            setTimeout( () => this.props.evaluateBoard(), 100)
+            this.setTile(selectedTile, usersPlayer.team)
         }
     }
+    setTile(tile, team) {
+        console.log("SETTING TILE:", tile, team)
+        this.props.setTile(tile, team)
+        this.props.endTurn()
+        
+        //set timeout allows the setTile event to complete and update the players
+        //board, before trying to evaluate it for a winner
+        setTimeout(() => this.props.evaluateBoard(), 100)
+    }
     performComputersTurn() {
+        let { board, player1, player2, usersPlayer } = this.props 
+
+        let computersPlayer = (usersPlayer === player1) ? player2 : player1 
+        if(!computersPlayer.isPlayersTurn) {
+            console.log("OH shit it aint my turn...")
+            return
+        }
         let computersNextMoveIndex = undefined
-        let { board, usersPlayer, computersPlayer } = this.props         
+
         let winningPaths = [
             [0,1,2],
             [3,4,5],
@@ -74,7 +84,7 @@ class TicTacToe extends React.Component {
             computersNextMoveIndex = openTiles[0]
         }
 
-        this.props.setTile(computersNextMoveIndex, computersPlayer.team)
+        this.setTile(computersNextMoveIndex, computersPlayer.team)
     }
     findWinningMove(winningPaths, computersSelectedTileIndexes) {
         let computersNextMoveIndex = undefined
@@ -129,16 +139,32 @@ class TicTacToe extends React.Component {
             )
         })
     }
+    renderGameOverResults(winner) {
+        return (winner === "draw") ? 
+                    (<div>Game Over! It's a Draw...</div>) : 
+                    (<div>Game Over! {winner.name} Won!</div>)
+    }
 
     render() {
-        let { player1, player2, gameOver, winner } = this.props
+        let { player1, player2, gameOver, winner, usersPlayer, isOnlineMatch } = this.props
+
+        if(!isOnlineMatch) {
+            //If it's the computers turn, then wait 3s then perform its turn
+            setTimeout(() => {
+                if(!usersPlayer.isPlayersTurn) {
+                    console.log("About to perform this niggas move")
+                    this.performComputersTurn()
+                }
+            }, 3000)
+        }
+
         return (
             <Wrapper>
                 <PlayersNameDisplay players={{player1, player2}}/>
                 <TicTacToeBoard>
                     {this.createTiles()}
                 </TicTacToeBoard>
-                { gameOver ? (<div>Game Over! {winner.name} Won!</div>) : null }
+                { gameOver ? this.renderGameOverResults(winner) : null }
                 <ResetButton onClick={this.props.resetGame.bind(this)}>Restart</ResetButton>
             </Wrapper>
         )
@@ -147,7 +173,8 @@ class TicTacToe extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        ...state.ticTacToe
+        ...state.ticTacToe,
+        isOnlineMatch: state.matchMaking.isOnlineMatch
     }
 }
 function mapDispatchToProps(dispatch) {
