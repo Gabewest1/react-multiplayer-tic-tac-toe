@@ -1,3 +1,5 @@
+import didPlayerWinTicTacToe from "utils/didPlayerWinTicTacToe"
+import isBoardFull from "utils/isBoardFull"
 import {
     SET_TILE
 } from "./constants"
@@ -39,39 +41,34 @@ export function endTurn() {
 
 export function evaluateBoard() {
     return (dispatch, getState) => {
-        let { board, usersPlayer } = getState().ticTacToe
+        let { board, usersPlayer, player1, player2 } = getState().ticTacToe
         let { isOnlineMatch } = getState().matchMaking
-         
-        let winningPaths = [
-            [0,1,2],
-            [3,4,5],
-            [6,7,8],
-            [0,3,6],
-            [1,4,7],
-            [2,5,8],
-            [0,4,8],
-            [6,4,2]
-        ]
-        let usersSelectedTileIndexes = board.reduce((selectedIndexes, row, i) => {
-            row.forEach((tile, j) => {
-                if(tile === usersPlayer.team) {
-                    selectedIndexes.push(i*3 + j)
-                }
-            })
-            return selectedIndexes
-        }, [])
-       
-        let didPlayerWin = false;
-        winningPaths.forEach(path => {
-            let p1Matches = path.filter(tile => usersSelectedTileIndexes.indexOf(tile) >= 0)
-            if(p1Matches.length === 3) {
-                didPlayerWin = true;
-            }
-        })
+        let opponent = (usersPlayer === player1) ? player2 : player1
 
-        if(didPlayerWin) {
-            let type = isOnlineMatch ?  "server/TIC_TAC_TOE_WINNER" : "TIC_TAC_TOE_WINNER"
-            dispatch({type, winner: usersPlayer})
-        } 
+        let didPlayerWin = didPlayerWinTicTacToe(usersPlayer.team, board)
+        
+        if(isOnlineMatch) {
+            if(didPlayerWin) {
+                dispatch({type: "server/TIC_TAC_TOE_WINNER", winner: usersPlayer})
+            } else {
+                let isDraw = isBoardFull(board)
+                if(isDraw) {
+                    dispatch({type: "TIC_TAC_TOE_WINNER", winner: "draw"})
+                }
+            } 
+        } else {
+            let didOpponentWin = didPlayerWinTicTacToe(opponent.team, board)
+            if(didPlayerWin) {
+                dispatch({type: "TIC_TAC_TOE_WINNER", winner: usersPlayer})
+            } else if(didOpponentWin) {
+                dispatch({type: "TIC_TAC_TOE_WINNER", winner: opponent})
+            } else {
+                let isDraw = isBoardFull(board)
+                if(isDraw) {
+                    dispatch({type: "TIC_TAC_TOE_WINNER", winner: "draw"})
+                }
+            }
+        }
+
     }
 }
