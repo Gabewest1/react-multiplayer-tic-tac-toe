@@ -1,4 +1,4 @@
-const determineWinner = require("./rockPaperScissorsWinner")
+const determineWinner = require("../app/utils/rockPaperScissorsWinner")
 const colors = require("colors")
 
 class GameRoomManager {
