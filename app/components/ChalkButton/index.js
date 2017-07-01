@@ -1,24 +1,34 @@
 import React from "react"
 import styled from "styled-components"
 import Link from "components/Link"
+import { Textfit } from "react-textfit"
 
 let Button = styled.div`
     background-image: url(assets/images/button--chalk.png);
     background-size: 100% 100%;
     background-color: transparent;
     border: none;
-    width: 400px;
-    height: 120px;
-    padding: 10px 15px;
-    font-size: 50px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
+    box-sizing: border-box;
+    width: 400px;   
+    height: 150px; 
+    padding: 1em;
+    opacity: .75;
 
     @media (max-width: 480px) {
-        width: 280px;
-        height: 84px;
+        width: 300px;
+        height: 112.5px;
     }
+
+    @media (max-width: 400px) {
+        width: 220px;
+        height: 82.5px;
+    }
+`
+
+let PaddedTextfit = styled(Textfit)`
+    box-sizing: border-box;
+    height: 100%;
+    padding: 0 15px;
 `
 
 export default (props) => {
@@ -28,12 +38,18 @@ export default (props) => {
     if(shouldRenderWithALink) {
         ButtonToRender = (
             <Button {...props}>
-                <Link to={props.to}>{props.children}</Link>
+                <PaddedTextfit mode="single" max="60" forceSingleModeWidth={false} >
+                    <Link to={props.to}>{props.children}</Link>
+                </PaddedTextfit>
             </Button>
         )
     } else {
         ButtonToRender = (
-            <Button {...props}>{props.children}</Button>
+            <Button {...props}>
+                <PaddedTextfit mode="single" max="60" forceSingleModeWidth={false} >
+                    {props.children}
+                </PaddedTextfit>
+            </Button>
         )
     }
     
