@@ -21,7 +21,7 @@ class RockPaperScissors extends React.Component {
                                                   : <AnimatedText>Opponent is deciding...</AnimatedText>
         return (
             <Wrapper>
-                <RockPaperScissorsOptions onClick={this.handleClick.bind(this)}/>
+                <RockPaperScissorsOptions selected={this.props.usersSelection} onClick={this.handleClick.bind(this)}/>
                 <RockPaperScissorsSelections>
                     <RockPaperScissorsImage type={this.props.usersSelection}/>
                     { OpponentsRockPaperScissorsMove }

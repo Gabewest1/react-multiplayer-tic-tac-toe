@@ -5,22 +5,25 @@ import Wrapper from "./Wrapper"
 
 export default class RockPaperScissorsOptions extends React.Component {
     render() {
-        let { choice, onClick } = this.props
+        let { choice, onClick, selected } = this.props
         return (
             <Wrapper>
                 <RockPaperScissorsOption onClick={(e) => onClick("rock")}>
                     <h1>Rock</h1>
-                    <RockPaperScissorsImage type={"rock"} />
+                    <RockPaperScissorsImage type={"rock"}
+                                            selected={selected === "rock"} />
                 </RockPaperScissorsOption>
 
                 <RockPaperScissorsOption onClick={(e) => onClick("paper")}>
                     <h1>Paper</h1>
-                    <RockPaperScissorsImage type={"paper"} />
+                    <RockPaperScissorsImage type={"paper"}
+                                            selected={selected === "paper"} />
                 </RockPaperScissorsOption>
                 
                 <RockPaperScissorsOption onClick={(e) => onClick("scissors")}>
                     <h1>Scissors</h1>
-                    <RockPaperScissorsImage type={"scissors"} />
+                    <RockPaperScissorsImage type={"scissors"}
+                                            selected={selected === "scissors"} />
                 </RockPaperScissorsOption>
             </Wrapper>
         )
