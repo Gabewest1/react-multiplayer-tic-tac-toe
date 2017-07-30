@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 import { push } from "react-router-redux"
 
+import { Textfit } from "react-textfit"
 import Wrapper from "./Wrapper"
 import RockPaperScissorsSelections from "./RockPaperScissorsSelections"
 import RockPaperScissorsOptions from "components/RockPaperScissorsOptions"
@@ -18,13 +19,15 @@ class RockPaperScissors extends React.Component {
     renderRockPaperScissorsGame() {
         let OpponentsRockPaperScissorsMove = 
                     this.props.opponentsSelection ? <RockPaperScissorsImage /> 
-                                                  : <AnimatedText>Opponent is deciding...</AnimatedText>
+                                                  : <Textfit mode="single" forceSingleModeWidth={false} ><AnimatedText>Opponent is deciding...</AnimatedText></Textfit> 
         return (
             <Wrapper>
                 <RockPaperScissorsOptions selected={this.props.usersSelection} onClick={this.handleClick.bind(this)}/>
                 <RockPaperScissorsSelections>
-                    <RockPaperScissorsImage type={this.props.usersSelection}/>
                     { OpponentsRockPaperScissorsMove }
+                    <div>
+                        <RockPaperScissorsImage type={this.props.opponentsSelection}/>
+                    </div>
                 </RockPaperScissorsSelections>
             </Wrapper>
         )
