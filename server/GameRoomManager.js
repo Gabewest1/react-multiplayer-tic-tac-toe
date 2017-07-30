@@ -101,7 +101,7 @@ class GameRoomManager {
         let gameRoom
         for(var i=0; i<this.gameRooms.length; i++) {
             let currentRoom = this.gameRooms[i]
-            if(currentRoom.players.indexOf(player) >= 0) {
+            if(currentRoom.players.indexOf(player) >= 0 || currentRoom.spectators.indexOf(player) >= 0) {
                 gameRoom = currentRoom
             }
         }

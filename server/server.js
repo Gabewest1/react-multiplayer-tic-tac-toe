@@ -6,6 +6,8 @@ const webpackDevMiddleware = require("webpack-dev-middleware")
 const webpackHotMiddleware = require("webpack-hot-middleware")
 const webpackConfig = require("../webpack.config.js")
 
+const PORT = 8000
+
 const compiler = webpack(webpackConfig)
 const app = express()
 
@@ -17,7 +19,7 @@ app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "app", "index.html"))
 })
 
-const server= app.listen(8000, () => console.log("running on port 8000"))
+const server = app.listen(PORT, () => console.log(`running on port ${PORT}`))
 
 const io = socket(server)
 const gameRoomManager = new (require("./GameRoomManager"))(io)
@@ -75,3 +77,10 @@ io.on("connection", (socket) => {
         }
     })
 })
+
+module.exports = {
+    port: PORT,
+    socket: io,
+    server,
+    gameRoomManager
+}
