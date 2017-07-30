@@ -9,19 +9,19 @@ export default class RockPaperScissorsOptions extends React.Component {
         return (
             <Wrapper>
                 <RockPaperScissorsOption onClick={(e) => onClick("rock")}>
-                    <h1>Rock</h1>
+                    <h1 style={{color: selected === "rock" ? "yellow" : "inherit"}}>Rock</h1>
                     <RockPaperScissorsImage type={"rock"}
                                             selected={selected === "rock"} />
                 </RockPaperScissorsOption>
 
                 <RockPaperScissorsOption onClick={(e) => onClick("paper")}>
-                    <h1>Paper</h1>
+                    <h1 style={{color: selected === "paper" ? "yellow" : "inherit"}}>Paper</h1>
                     <RockPaperScissorsImage type={"paper"}
                                             selected={selected === "paper"} />
                 </RockPaperScissorsOption>
                 
                 <RockPaperScissorsOption onClick={(e) => onClick("scissors")}>
-                    <h1>Scissors</h1>
+                    <h1 style={{color: selected === "scissors" ? "yellow" : "inherit"}}>Scissors</h1>
                     <RockPaperScissorsImage type={"scissors"}
                                             selected={selected === "scissors"} />
                 </RockPaperScissorsOption>
