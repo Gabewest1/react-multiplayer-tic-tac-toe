@@ -18,14 +18,9 @@ class SocketMock {
 
 describe("GameManager", () => {
     let gameRoomManager
-    let client
-    let server
-    let serverSocket
+    
     beforeEach((done) => {
-        server = require("./server").server
-        serverSocket = require("./server").socket
-        gameRoomManager = new (require("./GameRoomManager"))(serverSocket)
-        client = io(SERVER_URL)
+        gameRoomManager = new (require("./GameRoomManager"))()
         done()
     })
     // it("should add a player to a game room", (done) => {
