@@ -6,6 +6,16 @@ const colors = require("colors")
 const PORT = require("./server").port
 const SERVER_URL = `http://localhost:${PORT}`
 
+class SocketMock {
+    constructor(testFn) {
+        this.testFn = testFn || function() {}
+        this.id = Math.random() * 1000
+    }
+    emit(event, action) {
+        this.testFn(action)
+    }
+}
+
 describe("GameManager", () => {
     let gameRoomManager
     let client
