@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha ./server/GameRoomManager.test.js --timeout 15000",
+    "test": "mocha ./server/GameRoomManager.test.js --timeout 5000",
     "start": "node server/server.js"
   },
   "keywords": [],
