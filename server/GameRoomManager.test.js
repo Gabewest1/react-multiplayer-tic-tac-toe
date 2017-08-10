@@ -3,8 +3,6 @@ const expect = chai.expect
 const should = chai.should()
 const io = require("socket.io-client")
 const colors = require("colors")
-const PORT = require("./server").port
-const SERVER_URL = `http://localhost:${PORT}`
 
 class SocketMock {
     constructor(testFn) {
@@ -166,5 +164,51 @@ describe("GameManager", () => {
         gameRoomManager.rockPaperScissors(client2, "paper")
 
         setTimeout(() => done(), 1000)
+    })
+
+    it("should remove a player from game room", (done) => {
+        let client = new SocketMock()
+        let gameRoom
+
+        gameRoomManager.addPlayer(client)
+        gameRoomManager.removePlayer(client)
+        gameRoom = gameRoomManager.findPlayersGameRoom(client)
+
+        expect(gameRoom).to.equal(undefined)
+        done()
+    })
+
+    it("should remove a spectator from game room", (done) => {
+        let client = new SocketMock()
+        let gameRoom
+
+        gameRoomManager.addSpectator(client)
+        gameRoomManager.removePlayer(client)
+        gameRoom = gameRoomManager.findPlayersGameRoom(client)
+
+        expect(gameRoom).to.equal(undefined)
+        done()
+    })
+
+    it("should add and remove a client 5 times and there be 1 game room", (done) => {
+        let client = new SocketMock()
+
+        gameRoomManager.addPlayer(client)
+        gameRoomManager.removePlayer(client)
+        
+        gameRoomManager.addPlayer(client)
+        gameRoomManager.removePlayer(client)
+
+        gameRoomManager.addPlayer(client)
+        gameRoomManager.removePlayer(client)
+
+        gameRoomManager.addPlayer(client)
+        gameRoomManager.removePlayer(client)
+
+        gameRoomManager.addPlayer(client)
+        gameRoomManager.removePlayer(client)
+        
+        expect(gameRoomManager.gameRooms.length).to.equal(1)
+        done()
     })
 })
