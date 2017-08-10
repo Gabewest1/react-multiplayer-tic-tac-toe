@@ -41,16 +41,11 @@ class GameRoomManager {
         gameRoom.spectators.forEach(player => player.emit(eventName, data))
     }
     getOpenGame() {
-        let firstOpenGame;
-        if(this.gameRooms.length === 0) {
-            firstOpenGame = this.createGameRoom()
-            return firstOpenGame
-        }
         for(var i=0; i<this.gameRooms.length; i++) {
             let currentGameRoom = this.gameRooms[i]
-            if(currentGameRoom.players.length === 1) {
-                firstOpenGame = currentGameRoom
-                return firstOpenGame
+
+            if(currentGameRoom.players.length < 2) {
+                return currentGameRoom
             }
         }
 
@@ -90,6 +85,19 @@ class GameRoomManager {
             player1.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_LOSS"})
             player2.socket.emit("action", {type: "ROCK_PAPER_SCISSORS_WON"})
             this.messageGameRoom(gameRoom, "action", {type:"ROCK_PAPER_SCISSORS_WINNER", winner: player2.socket.id})
+        }
+    }
+    removePlayer(player) {
+        let gameRoom = this.findPlayersGameRoom(player)
+        let isPlayer = gameRoom.players.indexOf(player) !== -1 
+        let isSpectator = gameRoom.spectators.indexOf(player) !== -1
+
+        if(isPlayer) {
+            gameRoom.players = gameRoom.players.filter(person => person !== player)
+        }
+
+        if(isSpectator) {
+            gameRoom.spectators = gameRoom.spectators.filter(person => person !== player)
         }
     }
     resetRockPaperScissors(gameRoom) {
