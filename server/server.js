@@ -15,7 +15,7 @@ app.use(webpackDevMiddleware(compiler, {publicPath: webpackConfig.output.publicP
 app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(path.resolve(__dirname, "..", "app")))
-app.get("/*", (req, res) => {
+app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "app", "index.html"))
 })
 
@@ -23,10 +23,18 @@ const server = app.listen(PORT, () => console.log(`running on port ${PORT}`))
 
 const io = socket(server)
 const gameRoomManager = new (require("./GameRoomManager"))(io)
+
 io.on("connection", (socket) => {
     console.log(`${socket.id} connected to the game`)
     socket.on("disconnect", () => {
         console.log(`${socket.id} disconnected`)
+
+        let gameRoom = gameRoomManager.findPlayersGameRoom(socket)
+
+        if (gameRoom) {
+            gameRoomManager.removePlayer(socket)
+        }
+
     })
 
     socket.on("action", (action) => {
@@ -35,6 +43,10 @@ io.on("connection", (socket) => {
         switch(action.type) {
             case "server/FIND_OPPONENT": {
                 gameRoomManager.addPlayer(socket)
+                break
+            }
+            case "server/CANCEL_FIND_OPPONENT": {
+                gameRoomManager.removePlayer(socket)
                 break
             }
             case "server/ROCK_PAPER_SCISSORS_MOVE": {
