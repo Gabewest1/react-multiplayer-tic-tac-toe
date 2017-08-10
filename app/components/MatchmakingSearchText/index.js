@@ -1,6 +1,8 @@
 import React from "react"
 import AnimatedSpan from "./AnimatedSpan"
 import Wrapper from "./Wrapper"
+import { Textfit } from "react-textfit"
+
 
 export default class MatchmakingSearchText extends React.Component {
     handleClick(e) {
@@ -26,9 +28,9 @@ export default class MatchmakingSearchText extends React.Component {
     render() {
         let animatedText = this.animateText(this.props.children)
         return (
-            <Wrapper>
+            <Textfit mode="single" style={this.props.style}>
                 {animatedText}
-            </Wrapper>
+            </Textfit>
         )
     }
 }
