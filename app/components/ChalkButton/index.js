@@ -38,7 +38,7 @@ export default (props) => {
     if(shouldRenderWithALink) {
         ButtonToRender = (
             <Button {...props}>
-                <PaddedTextfit mode="single" max="60" forceSingleModeWidth={false} >
+                <PaddedTextfit mode="single" max={60} forceSingleModeWidth={false} >
                     <Link to={props.to}>{props.children}</Link>
                 </PaddedTextfit>
             </Button>
@@ -46,7 +46,7 @@ export default (props) => {
     } else {
         ButtonToRender = (
             <Button {...props}>
-                <PaddedTextfit mode="single" max="60" forceSingleModeWidth={false} >
+                <PaddedTextfit mode="single" max={60} forceSingleModeWidth={false} >
                     {props.children}
                 </PaddedTextfit>
             </Button>
