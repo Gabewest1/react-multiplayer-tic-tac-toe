@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { push } from "react-router-redux"
 import { bindActionCreators } from "redux"
+import { Textfit } from "react-textfit"
 
 import Wrapper from "./Wrapper"
 import AnimatedSearchText from "components/MatchMakingSearchText"
@@ -13,13 +14,13 @@ class MatchMakingPage extends React.Component {
     }
     renderSearchingForOpponent() {
         return (
-            <AnimatedSearchText>Searching for opponent...</AnimatedSearchText>
+            <AnimatedSearchText style={{width: "70%"}}>Searching for opponent...</AnimatedSearchText>
         )
     }
     renderFoundOpponent() {
         setTimeout(() => this.props.push("/rockPaperScissors"), 3000)
         return (
-            <div>Found Opponent!</div>
+            <Textfit mode="single" style={{width: "70%"}}>Found Opponent!</Textfit>
         )
     }
     render() {
