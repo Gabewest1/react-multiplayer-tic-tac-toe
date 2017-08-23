@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha ./server/GameRoomManager.test.js --timeout 5000",
+    "postinstall": "webpack -p",
     "start": "node server/server.js"
   },
   "keywords": [],
