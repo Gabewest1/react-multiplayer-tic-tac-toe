@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom'
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import multi from "redux-multi"
 import thunk from "redux-thunk"
 import createSagaMiddleware from "redux-saga"
 
