@@ -8,13 +8,14 @@ const webpackConfig = require("../webpack.config.js")
 
 const PORT = process.env.PORT || 3000
 
-const compiler = webpack(webpackConfig)
+// const compiler = webpack(webpackConfig)
 const app = express()
 
-app.use(webpackDevMiddleware(compiler, {publicPath: webpackConfig.output.publicPath}))
-app.use(webpackHotMiddleware(compiler))
+// app.use(webpackDevMiddleware(compiler, {publicPath: webpackConfig.output.publicPath}))
+// app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(path.resolve(__dirname, "..", "app")))
+
 app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "app", "index.html"))
 })
