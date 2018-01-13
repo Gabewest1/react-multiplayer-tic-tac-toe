@@ -34,10 +34,10 @@ class TicTacToe extends React.Component {
         setTimeout(() => this.props.evaluateBoard(), 100)
     }
     performComputersTurn() {
-        let { board, player1, player2, usersPlayer } = this.props 
+        let { board, gameOver, player1, player2, usersPlayer } = this.props 
 
         let computersPlayer = (usersPlayer === player1) ? player2 : player1 
-        if(!computersPlayer.isPlayersTurn) {
+        if(!computersPlayer.isPlayersTurn || gameOver) {
             console.log("OH shit it aint my turn...")
             return
         }

@@ -15,7 +15,7 @@ app.use(webpackDevMiddleware(compiler, {publicPath: webpackConfig.output.publicP
 app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(path.resolve(__dirname, "..", "app")))
-app.get("*", (req, res) => {
+app.get("/*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "..", "app", "index.html"))
 })
 

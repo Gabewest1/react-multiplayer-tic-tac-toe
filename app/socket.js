@@ -1,3 +1,3 @@
 import io from "socket.io-client"
-let socket = io("192.168.1.77:3000")
+let socket = io("ws:// 172.31.98.179:3000")
 export default socket

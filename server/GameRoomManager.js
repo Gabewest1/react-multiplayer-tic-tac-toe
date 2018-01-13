@@ -21,7 +21,8 @@ class GameRoomManager {
             id: this.gameRoomCounter++,
             players: [],
             spectators: [],
-            rockPaperScissors: []
+            rockPaperScissors: [],
+            gameStarted: false
         }
         this.gameRooms.push(newGameRoom);
         return newGameRoom
@@ -33,6 +34,7 @@ class GameRoomManager {
     }
     isGameRoomReady(gameRoom) {
         if(gameRoom.players.length === 2) {
+            gameRoom.gameStarted = true
             this.messageGameRoom(gameRoom, "action", {type: "FOUND_OPPONENT", payload: true})
         }
     }
@@ -44,7 +46,7 @@ class GameRoomManager {
         for(var i=0; i<this.gameRooms.length; i++) {
             let currentGameRoom = this.gameRooms[i]
 
-            if(currentGameRoom.players.length < 2) {
+            if(currentGameRoom.players.length < 2 && !currentGameRoom.gameStarted) {
                 return currentGameRoom
             }
         }
