@@ -1,9 +1,7 @@
 import styled from "styled-components"
-import x from "assets/images/x.png"
-import o from "assets/images/o.png"
 
-const xURL = `url(assets/images/x.png)`
-const oURL = `url(assets/images/o.png)`
+const xURL = `url(/assets/images/x.png)`
+const oURL = `url(/assets/images/o.png)`
 
 let PlayerLogo = styled.div`
     width: 60px;

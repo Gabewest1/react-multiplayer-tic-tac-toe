@@ -1,5 +1,5 @@
-import getRockPaperScissorsMove from "utils/getRockPaperScissorsMove"
-import rockPaperScissorsWinner from "utils/rockPaperScissorsWinner"
+import getRockPaperScissorsMove from "../../utils/getRockPaperScissorsMove"
+import rockPaperScissorsWinner from "../../utils/rockPaperScissorsWinner"
 
 export function setPlayer(player, team, isPlayersTurn) {
     return (dispatch, getState) => {
@@ -11,7 +11,7 @@ export function setPlayer(player, team, isPlayersTurn) {
             dispatch({
                 type: "SET_PLAYER",
                 player: player === "player1" ? "player2" : "player1",
-                name: "The Ticker",
+                name: "Computer",
                 team: team === "x" ? "o" : "x",
                 isPlayersTurn: !isPlayersTurn
             })

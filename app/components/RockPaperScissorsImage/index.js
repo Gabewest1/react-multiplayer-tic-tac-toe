@@ -1,13 +1,13 @@
 import React from "react"
 import styled from "styled-components"
 
-import Rock from "assets/images/rock.png"
-import RockSelected from "assets/images/rock--selected.png"
-import Paper from "assets/images/paper.png"
-import PaperSelected from "assets/images/paper--selected.png"
-import Scissors from "assets/images/scissors.png"
-import ScissorsSelected from "assets/images/scissors--selected.png"
-import QuestionMark from "assets/images/questionMark.png"
+const Rock = "/assets/images/rock.png"
+const RockSelected = "/assets/images/rock--selected.png"
+const Paper = "/assets/images/paper.png"
+const PaperSelected = "/assets/images/paper--selected.png"
+const Scissors = "/assets/images/scissors.png"
+const ScissorsSelected = "/assets/images/scissors--selected.png"
+const QuestionMark = "/assets/images/questionMark.png"
 
 let RockPaperScissorsImage = styled.img`
     max-width: 100%;

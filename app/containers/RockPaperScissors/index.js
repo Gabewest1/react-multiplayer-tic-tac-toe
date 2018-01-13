@@ -5,9 +5,9 @@ import { push } from "react-router-redux"
 
 import Wrapper from "./Wrapper"
 import RockPaperScissorsSelections from "./RockPaperScissorsSelections"
-import RockPaperScissorsOptions from "components/RockPaperScissorsOptions"
-import RockPaperScissorsImage from "components/RockPaperScissorsImage"
-import AnimatedText from "components/MatchMakingSearchText"
+import RockPaperScissorsOptions from "../../components/RockPaperScissorsOptions"
+import RockPaperScissorsImage from "../../components/RockPaperScissorsImage"
+import AnimatedText from "../../components/MatchMakingSearchText"
 import ReadyText from "./ReadyText"
 
 import * as actions from "./actions"

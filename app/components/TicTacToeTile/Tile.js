@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
-const xURL = `url(assets/images/x.png)`
-const oURL = `url(assets/images/o.png)`
+const xURL = `url(/assets/images/x.png)`
+const oURL = `url(/assets/images/o.png)`
 
 let Tile = styled.div`
     background-image: ${({team}) => team === "x" ? xURL : team === "o" ? oURL : ""};

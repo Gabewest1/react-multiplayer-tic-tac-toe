@@ -1,5 +1,5 @@
-import didPlayerWinTicTacToe from "utils/didPlayerWinTicTacToe"
-import isBoardFull from "utils/isBoardFull"
+import didPlayerWinTicTacToe from "../../utils/didPlayerWinTicTacToe"
+import isBoardFull from "../../utils/isBoardFull"
 import {
     SET_TILE
 } from "./constants"

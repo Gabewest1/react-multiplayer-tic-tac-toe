@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux"
 import { Textfit } from "react-textfit"
 
 import Wrapper from "./Wrapper"
-import AnimatedSearchText from "components/MatchMakingSearchText"
+import AnimatedSearchText from "../../components/MatchMakingSearchText"
 import * as actions from "./actions"
 
 class MatchMakingPage extends React.Component {

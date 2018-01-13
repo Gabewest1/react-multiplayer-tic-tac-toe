@@ -1,6 +1,6 @@
 import React from "react"
-import RockPaperScissorsOption from "components/RockPaperScissorsOption"
-import RockPaperScissorsImage from "components/RockPaperScissorsImage"
+import RockPaperScissorsOption from "../RockPaperScissorsOption"
+import RockPaperScissorsImage from "../RockPaperScissorsImage"
 import Wrapper from "./Wrapper"
 
 export default class RockPaperScissorsOptions extends React.Component {

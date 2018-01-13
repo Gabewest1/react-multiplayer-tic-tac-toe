@@ -9,8 +9,10 @@ let Player = styled.div`
 
 export default (props) => {
     let { name, team, isPlayersTurn } = props.player
+
     if(name.length > 8) 
-        name = name.substring(0, 9)
+        name = name.substring(0, 12)
+        
     return (
         <CenteredWrapper>
             <Player isPlayersTurn={isPlayersTurn}>

@@ -1,9 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import board from "assets/images/board.png"
 
 let Board = styled.div`
-    background-image: url(${board});
+    background-image: url(/assets/images/board.png);
     background-size: cover;
     display: inline-block;
 `

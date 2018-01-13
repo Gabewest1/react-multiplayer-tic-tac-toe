@@ -1,18 +1,17 @@
 import React from "react"
 import { Route } from "react-router-dom"
 
-import HomePage from "containers/HomePage"
-import TicTacToe from "containers/TicTacToe"
-import RockPaperScissors from "containers/RockPaperScissors"
-import MatchMaking from "containers/MatchMaking"
+import HomePage from "../HomePage"
+import TicTacToe from "../TicTacToe"
+import RockPaperScissors from "../RockPaperScissors"
+import MatchMaking from "../MatchMaking"
 
 import Wrapper from "./Wrapper"
-import chalkboard from "./chalkboard.jpg"
 
 export default class App extends React.Component {
     render() {
         return (
-            <Wrapper bg={chalkboard}>
+            <Wrapper bg="/assets/images/chalkboard.jpg">
                 <Route exact path="/" component={HomePage} />
                 <Route path="/ticTacToe" component={TicTacToe} />
                 <Route path="/rockPaperScissors" component={RockPaperScissors} />

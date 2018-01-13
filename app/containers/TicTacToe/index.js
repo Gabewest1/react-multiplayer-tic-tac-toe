@@ -2,9 +2,9 @@ import React from "react"
 import { bindActionCreators } from "redux"
 import { connect } from "react-redux"
 
-import TicTacToeBoard from "components/TicTacToeBoard"
-import Tile from "components/TicTacToeTile" 
-import PlayersNameDisplay from "components/PlayersNameDisplay"
+import TicTacToeBoard from "../../components/TicTacToeBoard"
+import Tile from "../../components/TicTacToeTile" 
+import PlayersNameDisplay from "../../components/PlayersNameDisplay"
 
 import ResetButton from "./ResetButton"
 import Wrapper from "./Wrapper"

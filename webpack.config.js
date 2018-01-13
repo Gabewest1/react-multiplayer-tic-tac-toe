@@ -4,8 +4,8 @@ const webpack = require("webpack")
 module.exports = {
     devtool: "source-map",
     entry: [
-        'webpack/hot/dev-server',
-        'webpack-hot-middleware/client',
+        // 'webpack/hot/dev-server',
+        // 'webpack-hot-middleware/client',
         "./app/app.js"
     ],
     output: {
@@ -51,12 +51,6 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
-    ],
-    resolve: {
-        modules: [
-            "node_modules",
-            path.resolve(__dirname, "app")
-        ]
-    },
-    watch: true
+    ]
+    // watch: true
 }

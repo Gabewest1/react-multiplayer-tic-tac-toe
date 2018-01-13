@@ -20,7 +20,7 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import reducers from './reducers'
 import sagas from "./sagas"
 
-import App from "containers/App"
+import App from "./containers/App"
 import "normalize.css"
 
 const history = createHistory()

@@ -1,7 +1,7 @@
 import React from "react"
 
 import Wrapper from "./Wrapper"
-import ChalkButton from "components/ChalkButton"
+import ChalkButton from "../../components/ChalkButton"
 
 export default class HomePage extends React.Component {
     render() {
